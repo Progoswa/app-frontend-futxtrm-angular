@@ -1,0 +1,134 @@
+
+
+.success{
+    color: #1e88e5;
+}
+
+
+.text-center {
+    text-align: center;
+}
+
+.margin-auto{
+    margin: auto;
+}
+::ng-deep .mat-input-element::placeholder{
+    color: white;
+ }
+ 
+ ::ng-deep .mat-input-element::placeholder{
+     color: white;
+ }
+
+.margin-button-5{
+    margin-bottom: 5px;
+}
+
+.margin-top{
+    margin-top: 0;
+}
+
+.upload-icon{
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+
+.cargando{
+    margin-top: 30px;
+}
+.margin-actions{
+    margin-bottom: -12px !important;
+}
+
+.imagen-upload{
+    max-width: 550px !important;
+    max-height: 300px !important;
+    width: 550px;
+    height: 300px;
+}
+
+.content{
+    background: inherit;
+}::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: inherit;
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.527);
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(85, 85, 85, 0.575);
+  }
+
+  ::ng-deep .mat-dialog-container {
+      background-color:#0e0e0e;
+  }
+
+  ::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+    background-color: white !important;
+}
+
+
+
+//input outline color
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #D0AE3D!important;
+    // opacity: 1!important;
+}
+
+//mat-input focused color
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color:#D0AE3D !important;
+}
+
+// mat-input error outline color
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick{
+    color: red!important;
+    opacity: 0.8!important;
+}
+
+// mat-input carent color
+::ng-deep .mat-input-element {
+    caret-color: white !important;
+}
+
+// mat-input error carent color
+::ng-deep .mat-form-field-invalid .mat-input-element, .mat-warn .mat-input-element {
+    caret-color: white !important;
+}
+
+// mat-label normal state style
+::ng-deep .mat-form-field-label {
+    color: white !important;
+    // color: $mainColor!important;
+}
+
+// mat-label focused style
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color:  white !important;
+}
+
+// mat-label error style
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+    color: red!important;
+}
+
+
+::ng-deep .mat-select-value-text{
+    color: white !important;
+}
+::ng-deep .mat-input-element:disabled{
+    color: white !important;
+}

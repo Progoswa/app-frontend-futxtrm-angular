@@ -1,0 +1,44 @@
+<div>
+  <div
+    class="alert alert-warning color-negro futxtrm-color-blanco alert-dismissible fade show"
+    role="alert"
+  >
+    {{ "user.home.welcome" | translate }} {{ usuarioService.user?.nombre }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+<h3 class="color-dorado">{{ "user.home.title" | translate }}</h3>
+<div class="row">
+  <div
+    *ngFor="let categoria of categoriasAndTime"
+    class="col-md-4 col-sm-6 col-xs-12"
+    style="padding: 20px"
+    fxFlex="row"
+  >
+    <div>
+      <mat-card
+        class="categoria-card"
+        [ngStyle]="{ 'background-image': getImg(categoria.categoria.imagen) }"
+      >
+        <div
+          *ngIf="!misCategorias.includes(categoria.categoria._id)"
+          class="lock"
+          (click)="comprar(categoria.categoria, categoria.tiempo)"
+        >
+          <mat-icon class="lock-icon">lock</mat-icon>
+        </div>
+        <div
+          *ngIf="misCategorias.includes(categoria.categoria._id)"
+          class="unlock"
+          (click)="verCategoria(categoria.categoria, categoria.tiempo)"
+        ></div>
+      </mat-card>
+    </div>
+
+    <div class="title">
+      <span>{{ categoria.categoria.nombre }}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div *ngIf="pago" class="color-dorado">
+  <h3>{{'pages.payments.membership.payment.title' | translate}}</h3>
+  <p>{{pago.usuario.nombre}} {{pago.usuario.apellido}} {{'pages.payments.membership.payment.msg' | translate}} {{pago.membresia.name}}</p>
+  <p>{{'pages.payments.membership.payment.date' | translate}}  <span class="color-blanco">{{pago.fecha | date:'short'}}</span></p>
+  <p>{{'pages.payments.membership.payment.amount' | translate}}  <span class="color-blanco">{{pago.monto}}$</span></p>
+  <p>{{'pages.payments.membership.payment.method' | translate}}  <span class="color-blanco">{{pago.metodo}}</span></p>
+  <p>{{'pages.payments.membership.payment.number' | translate}}  <span class="color-blanco">{{pago.referencia}}</span></p>
+  
+
+</div>

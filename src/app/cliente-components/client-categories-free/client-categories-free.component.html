@@ -1,0 +1,78 @@
+<div class="login" fxLayout="row">
+  <img
+    class="logo"
+    alt="homepage"
+    src="./assets/images/logo.png"
+    width="180px"
+  />
+
+  <button
+    (click)="logout()"
+    mat-raised-button
+    class="futxtrm-color-dorado logout-start"
+  >
+    {{ "header.admin.user.logout" | translate }}
+  </button>
+
+  <div
+    fxFlex.lt-sm="100%"
+    fxFlex.gt-sm="65%"
+    fxFlex.md="90%"
+    [ngStyle.xs]="{ 'margin-top': '300px' }"
+    fxFlexAlign="center"
+    class="color-blanco black-opacity container"
+    style="padding-top: 30px"
+  >
+    <div class="text-center">
+      <h2 class="color-dorado">{{ msg?.title }}</h2>
+      <h4 class="color-dorado">{{ msg?.message }}</h4>
+    </div>
+    <div class="row" style="justify-content: center">
+      <div
+        *ngFor="let categoria of categorias"
+        class="col-md-6 col-lg-4 col-sm-6 col-xs-12"
+        style="padding: 20px"
+        fxFlex="row"
+      >
+        <div class="title">
+          <span>{{ categoria.categoria.nombre }}</span> <br />
+          <!-- <span>{{categoria.dias}} Dias gratis!</span> -->
+        </div>
+        <div>
+          <mat-card
+            ngClass.xs="margin-0"
+            (click)="select(categoria)"
+            class="categoria-card"
+            [ngStyle]="{
+              'background-image': getImg(categoria.categoria.imagen)
+            }"
+          >
+            <div *ngIf="categoriaSelected(categoria)" class="check">
+              <mat-icon class="check-icon">check</mat-icon>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+      <div class="col-sm-12 text-center" style="padding-bottom: 40px">
+        <button
+          mat-raised-button
+          class="futxtrm-color-dorado"
+          (click)="next()"
+          [disabled]="categoria == null"
+        >
+          {{ "user.free.button" | translate }}
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
+      <div class="col-sm-12 text-center" style="padding-bottom: 40px">
+        <button
+          mat-raised-button
+          routerLink="/start"
+          class="futxtrm-color-dorado"
+        >
+          {{ "user.free.categorie" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

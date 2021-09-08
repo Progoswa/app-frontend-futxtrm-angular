@@ -1,0 +1,29 @@
+<h2 mat-dialog-title class="text-center margin-button-5 color-dorado">{{'pages.free_categories.edit_text.msg' | translate}}</h2>
+<div mat-dialog-content class="text-center margin-button-5">
+<form class="color-blanco">
+
+
+<div><form [formGroup]="textForm">
+  <mat-form-field appearance="outline">
+    <mat-label>{{'pages.free_categories.edit_text.title' | translate}}</mat-label>
+    <input formControlName="title" matInput>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>{{'pages.free_categories.edit_text.message' | translate}}</mat-label>
+    <textarea matInput cdkTextareaAutosize formControlName="message"></textarea>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>{{'pages.free_categories.edit_text.days' | translate}}</mat-label>
+    <input type="number" formControlName="days" matInput>
+  </mat-form-field>
+</form>
+
+
+</div> 
+
+</form>
+  </div> 
+<div mat-dialog-actions class="margin-actions float-right">
+  <button mat-button (click)="onNoClick()" tabindex="-1"  class="margin-button-5 futxtrm-color-gris">{{'pages.free_categories.edit_text.cancel' | translate}} <mat-icon>cancel</mat-icon></button>
+  <button mat-button (click)="aceptar()" tabindex="-1" [disabled]="textForm.invalid" class="margin-button-5 futxtrm-color-dorado" >{{'pages.free_categories.edit_text.edit' | translate}} <mat-icon>edit</mat-icon></button>
+</div>

@@ -1,0 +1,88 @@
+
+
+<div class="login" fxLayout="row">
+  <img class="logo" alt="homepage" src="./assets/images/logo.png" width="180px">
+
+  <button (click)="logout()" mat-raised-button class="futxtrm-color-dorado logout-start">{{'header.admin.user.logout' | translate}}</button>
+  
+ 
+    <div fxFlex.lt-sm="100%" fxFlex.gt-sm="65%" fxFlex.md="90%" [ngStyle.xs]="{'margin-top':'300px'}"  fxFlexAlign="center" class=" color-blanco black-opacity container " style="padding-top: 30px;">
+  
+  
+        <div class="text-center" *ngIf="option == 'c'">
+          <h2 class="color-dorado">{{'user.start.categorie.title' | translate}}</h2> 
+          <h4 class="color-dorado">{{'user.start.categorie.subtitle' | translate}} <a (click)="cOption('m')"  class="color-dorado option">{{'user.start.categorie.membership' | translate}}</a></h4>   
+        </div>
+        <div class="text-center" *ngIf="option == 'm'">
+          <h2 class="color-dorado">{{'user.start.membership.title' | translate}}</h2> 
+          <h4 class="color-dorado">{{'user.start.membership.subtitle' | translate}} <a (click)="cOption('c')"  class="color-dorado option">{{'user.start.membership.categorie' | translate}}</a></h4>   
+        </div>
+         <div class="row" style="justify-content: center;">
+          <div class="col-sm-1"  fxShow="true" fxShow.lt-md="false">
+            <button mat-raised-button class="button-arrow futxtrm-color-dorado" (click)="add(-1)"><mat-icon>arrow_back</mat-icon></button>
+
+          </div>
+          <div *ngIf="option == 'c'" class="col-md-10 col-sm-12 row">
+            <div *ngFor="let categoria of categorias.slice(i,i+3)" class="col-sm-4 col-xs-12 " style="padding: 20px;" fxFlex="row">
+              <div class="title">
+                <span>{{categoria.nombre}}</span> <br>
+              </div>
+              <div>
+          
+                <mat-card ngClass.xs="margin-0" (click)="select(categoria._id)" class="categoria-card" [ngStyle]="{'background-image': getImg(categoria.imagen)}"  >
+                  <div *ngIf="categoriaSelected(categoria._id)" class="check" ><mat-icon class="check-icon">check</mat-icon></div>
+  
+                </mat-card> 
+              </div>
+              
+            
+            
+            </div>
+          </div>
+          <div *ngIf="option == 'm'" class="col-md-10 col-sm-12 row">
+            <div *ngFor="let membresia of membresias.slice(j,j+3)" class="ol-sm-4 col-xs-12 " style="padding: 20px;" fxFlex="row">
+              <div class="title">
+                <span>{{membresia.name}}</span> <br>
+              </div>
+              <div>
+          
+                <mat-card ngClass.xs="margin-0" (click)="select(membresia._id)" class="categoria-card" [ngStyle]="{'background-image': getImg(membresia.image)}"  >
+                  <div *ngIf="categoriaSelected(membresia._id)" class="check" ><mat-icon class="check-icon">check</mat-icon></div>
+  
+                </mat-card> 
+              </div>
+              
+            
+            
+            </div>
+          </div>
+         
+          <div class="col-sm-1"  fxShow="true" fxShow.lt-md="false">
+            <button mat-raised-button class="button-arrow futxtrm-color-dorado" (click)="add(1)"><mat-icon>arrow_forward</mat-icon></button>
+
+          </div>
+          <div class="col-sm-12 text-right" fxShow="false" fxShow.lt-md="true" style="padding-bottom: 15px;">
+            <button mat-raised-button class="futxtrm-color-dorado"  style="margin-right: 5px;" (click)="add(-1)"><mat-icon>arrow_back</mat-icon></button>
+
+            <button mat-raised-button class="futxtrm-color-dorado" style="margin-right: 5px;"  (click)="add(1)"><mat-icon>arrow_forward</mat-icon></button>
+
+          </div>
+          <div class="col-sm-12 text-center" style="padding-bottom: 40px;"> 
+            <button mat-raised-button class="futxtrm-color-dorado"  [disabled]="categoria == null" (click)="next()">{{'user.start.button' | translate}} <mat-icon>arrow_forward</mat-icon></button>
+          </div>
+          <div *ngIf="free" class="col-sm-12 text-center" style="padding-bottom: 40px;"> 
+            <button mat-raised-button routerLink="/free" class="futxtrm-color-dorado">{{'user.start.free' | translate}}</button>      
+        </div>
+         
+         
+        
+         </div>
+   
+
+     
+             
+  </div>
+
+
+
+</div>

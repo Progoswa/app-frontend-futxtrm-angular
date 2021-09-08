@@ -1,0 +1,65 @@
+<h2 mat-dialog-title class="text-center margin-button-5 color-dorado">{{'pages.sections.edit.title' | translate}}</h2>
+<div mat-dialog-content class="text-center margin-button-5">
+<form [formGroup]="seccionForm" class="color-blanco">
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{'pages.sections.edit.name' | translate}}</mat-label>
+      <input matInput type="text" formControlName="nombre">
+      <mat-error *ngIf="seccionForm.controls.nombre.hasError('required')">{{'pages.sections.edit.name_required' | translate}}</mat-error>
+    </mat-form-field>
+    <div style="text-align: left;">
+      <span>{{'pages.sections.edit.msg_conditional' | translate}}</span><br>
+      <mat-checkbox class="example-margin" formControlName="condicional">{{'pages.sections.edit.conditional' | translate}}</mat-checkbox>
+        </div>
+  
+    <div class="row">
+      <div class="col-sm-12"> <h5>{{'pages.sections.edit.block_msg' | translate}}</h5></div>
+    
+ 
+        <div *ngFor="let bloque of bloques;let i = index" class="col-sm-12 row" style="margin-top: 5px;">
+          <div class="col-sm-4" style="padding: 0 5px;">
+            <mat-form-field appearance="outline">
+              <mat-label>{{'pages.sections.edit.minuts' | translate}}</mat-label>
+              <input matInput type="number" pattern="^[0-9.]+$"  [(ngModel)] = "bloque.minutos" [ngModelOptions]="{standalone: true}" > </mat-form-field>
+  
+          </div>
+          <div class="col-sm-4"style="padding: 0 5px;">
+            <mat-form-field appearance="outline">
+              <mat-label>{{'pages.sections.edit.amount' | translate}}</mat-label>
+              <input matInput type="number" pattern="^[0-9.]+$"  [(ngModel)] = "bloque.ejercicios" [ngModelOptions]="{standalone: true}" >
+        
+            </mat-form-field>
+          </div>
+          <div class="col-sm-2"style="padding: 0 5px;">
+            <button mat-raised-button class="futxtrm-color-dorado" (click)="addBloque()" *ngIf="(bloques.length == 1 && i == 0) || (bloques.length == 2 && i == 1)" style="float: right;"><mat-icon>add</mat-icon></button>
+ 
+          </div>
+          <div class="col-sm-2"style="padding: 0 5px;">
+            <button mat-raised-button *ngIf="bloques.length > 1" class="futxtrm-color-dorado" (click)="removeBloque()" style="float: right;"><mat-icon>remove</mat-icon></button>
+    
+          </div>
+          <div class="col-sm-12">
+
+            <span>{{'pages.sections.edit.duration' | translate}} {{ (bloque.minutos * bloque.ejercicios) || 0}}</span>
+          </div>
+      
+        </div>
+  
+    
+  
+    </div>
+
+   
+ 
+    <mat-form-field appearance="outline">
+      <mat-label>{{'pages.sections.edit.description' | translate}}</mat-label>
+      <textarea matInput formControlName="descripcion"></textarea>
+      <mat-error *ngIf="seccionForm.controls.descripcion.hasError('required')">{{'pages.sections.edit.description_required' | translate}}</mat-error>
+
+    </mat-form-field>
+</form>
+  </div>
+<div mat-dialog-actions class="margin-actions float-right">
+  <button mat-button (click)="onNoClick()" tabindex="-1"  class="margin-button-5 futxtrm-color-gris">{{'pages.sections.edit.cancel' | translate}} <mat-icon>cancel</mat-icon></button>
+  <button mat-button (click)="aceptar()" tabindex="-1"  class="margin-button-5 futxtrm-color-dorado" [disabled]="seccionForm.invalid || bloquesOK() " >{{'pages.sections.edit.save' | translate}} <mat-icon>save</mat-icon></button>
+</div>

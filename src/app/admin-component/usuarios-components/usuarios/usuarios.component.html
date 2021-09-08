@@ -1,0 +1,102 @@
+<div >
+  <div fxLayout="row wrap"   fxLayoutAlign="center" [ngStyle]="{'margin':'auto'}">
+    <!-- column -->    
+     <div fxFlex="100">
+         <mat-card [ngStyle]="{'place-content': 'center'}" class="futxtrm-color-negro color-blanco">
+           
+             <mat-card-content fxFlex="90" >
+               <div fxLayout.gt-xs="row"  fxLayout.xs="column" >
+                 <div fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%" >
+                   <h3 class="text-themecolor title">{{'pages.users.title' | translate}}</h3>
+  
+                 </div>
+                 <div fxLayout.gt-xs="column" fxLayout.xs="row"  fxFlex.gt-xs="50%" fxFlex.xs="100%">
+  
+                   <mat-form-field class="buscador" [ngClass.gt-sm]="'buscador-small'" fxLayoutAlign.gt-xs="end" appearance="outline"> 
+   
+                     <mat-label>{{'pages.users.search' | translate}}</mat-label> 
+                     <mat-icon matPrefix class="icon-search color-blanco" >search</mat-icon>
+                     <input matInput (keyup)="applyFilter($event)" >
+                   </mat-form-field>
+                 </div>
+               </div>
+  
+               <mat-table class="table-white" [dataSource]="dataSource" class="futxtrm-color-negro" >
+                 <!-- Position Column -->
+                 <ng-container matColumnDef="nombre">
+                   <mat-header-cell *matHeaderCellDef  > {{'pages.users.users' | translate}} </mat-header-cell>
+                   <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+                 </ng-container>
+                 <ng-container matColumnDef="apellido">
+                   <mat-header-cell *matHeaderCellDef  > {{'pages.users.name' | translate}} </mat-header-cell>
+                   <mat-cell *matCellDef="let element">{{element.nombre}} {{element.apellido}}</mat-cell>
+                 </ng-container>
+              
+                 <ng-container matColumnDef="roleadmin">
+                   <mat-header-cell *matHeaderCellDef  > {{'pages.users.roles' | translate}} </mat-header-cell>
+                   <mat-cell *matCellDef="let element"> 
+                    <div *ngIf="permisos.roles_asignar && element.role == 'administrador'" fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%">
+                      <button mat-mini-fab class="futxtrm-color-dorado" [ngClass.gt-xs]="'margin-buttons-row'" [ngClass.xs]="'margin-buttons-col'" matTooltip="{{'pages.users.add.msg' | translate}}"  matTooltipPosition="above" (click)="asignar(element._id)">
+                        <mat-icon aria-label="Example icon-button with a heart icon" >autorenew</mat-icon>
+                      </button>                      
+                    </div>
+                    {{(element.adminRole)?element.adminRole.nombre:translate.instant('pages.users.role_client')}} 
+                   </mat-cell>
+                 </ng-container>
+  
+               
+                 <ng-container matColumnDef="fecha">
+                   <mat-header-cell *matHeaderCellDef  > {{'pages.users.date' | translate}} </mat-header-cell>
+                   <mat-cell *matCellDef="let element"> {{element.fechaCreacion | date:'short'}} </mat-cell>
+                 </ng-container>
+               
+               
+                 <!-- Name Column -->
+                 <ng-container matColumnDef="status" >
+                   <mat-header-cell *matHeaderCellDef    [ngStyle]="{'place-content':'center'}"> {{'pages.users.status' | translate}} </mat-header-cell>
+                   <mat-cell *matCellDef="let element" [ngStyle]="{'place-content':'center'}">
+                     <mat-slide-toggle *ngIf="permisos.usuarios_cambiar_estado" [checked]="element.status" (click)="cambiarStatus(element._id)"></mat-slide-toggle>
+                   </mat-cell>
+                 </ng-container>
+                 <ng-container matColumnDef="verificado" >
+                   <mat-header-cell *matHeaderCellDef    [ngStyle]="{'place-content':'center'}"> {{'pages.users.verified' | translate}} </mat-header-cell>
+                   <mat-cell *matCellDef="let element" [ngStyle]="{'place-content':'center'}">
+                     <mat-icon [ngClass]="(element.verificado)?'verde':'rojo'" >{{element.verificado ?'checked':'close'}}</mat-icon>
+                   </mat-cell>
+                 </ng-container>
+              
+                 <!-- Weight Column -->
+                 <ng-container matColumnDef="opciones">
+                   <mat-header-cell *matHeaderCellDef   [ngStyle]="{'place-content':'center'}"> {{'pages.users.options' | translate}} </mat-header-cell>
+                   <mat-cell *matCellDef="let element" [ngStyle]="{'place-content':'center','overflow':'visible'}" >
+                     <div  fxLayout.gt-xs="row"  fxLayout.xs="column" >
+                      
+                       <div *ngIf="permisos.usuarios_consultar" fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%">
+                         <button mat-mini-fab class="futxtrm-color-dorado" [ngClass.gt-xs]="'margin-buttons-row'" [ngClass.xs]="'margin-buttons-col'" matTooltip="{{'pages.users.see.msg' | translate}}"  matTooltipPosition="above" (click)="consultar(element._id)">
+                           <mat-icon aria-label="Example icon-button with a heart icon" >info</mat-icon>
+                         </button>                      
+                       </div>
+                    
+                     </div>
+                    
+                   </mat-cell>
+                 
+                 </ng-container>
+               
+                 <!-- Symbol Column -->
+                
+               
+                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                 <mat-row *matRowDef="let row;  let even = even; columns: displayedColumns;"  [ngClass]="{gray: even}"></mat-row>
+               </mat-table>
+               <mat-paginator  class="futxtrm-color-negro color-blanco" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+             </mat-card-content>
+         </mat-card>
+     </div>
+      
+  </div>
+  
+  <button *ngIf="permisos.usuarios_crear" mat-fab class="futxtrm-color-dorado add-button"  matTooltip="{{'pages.users.new.msg' | translate}}" routerLink="/admin/usuarios/agregar">
+   <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+  </button>
+</div>

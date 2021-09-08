@@ -1,0 +1,117 @@
+<h2 mat-dialog-title class="text-center margin-button-5 color-dorado">{{'pages.categories.edit.title' | translate}} {{data.nombre}}</h2>
+<div mat-dialog-content class="text-center margin-button-5">
+<form [formGroup]="categoriaForm" class="color-blanco">
+<div>
+  <h6>{{'pages.categories.edit.data' | translate}}</h6>
+  <mat-form-field appearance="outline">
+    <mat-label>{{'pages.categories.edit.name' | translate}}</mat-label>
+    <input matInput type="text" formControlName="nombre">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{'pages.categories.edit.frequency' | translate}}</mat-label>
+    <input matInput type="text" formControlName="frecuencia">
+  </mat-form-field>
+
+
+  <div class="row">
+    <div class="col-sm-12"><h5>{{'pages.categories.edit.prices' | translate}}</h5></div>
+  </div>
+    <div class="row" *ngFor="let precio of precios">
+      <div class="col-sm-4">
+        <h3 style="margin-top: 15px;">{{precio.meses}} {{(precio.meses == 1)?translate.instant('pages.categories.edit.month'):translate.instant('pages.categories.edit.months')}}</h3>
+      </div>
+      <mat-form-field class="col-sm-4" appearance="outline">
+        <mat-label>{{'pages.categories.edit.price' | translate}}</mat-label>
+        <span matPrefix style="vertical-align: super;">$ &nbsp;</span>
+    
+        <input matInput type="number" pattern="^[0-9.]+$" [(ngModel)] = "precio.precio" [ngModelOptions]="{standalone: true}" >
+      </mat-form-field>
+      <mat-form-field class="col-sm-4" appearance="outline">
+        <mat-label>{{'pages.categories.edit.discount' | translate}}</mat-label>
+        <span matPrefix style="vertical-align: super;">% &nbsp;</span>
+    
+        <input matInput type="number" pattern="^[0-9.]+$" [(ngModel)] = "precio.descuento" [ngModelOptions]="{standalone: true}" >
+      </mat-form-field>
+  
+    </div>
+</div>
+   
+
+   <div class="row">
+     
+     <div class="col-sm-12"><h6>{{'pages.categories.edit.default' | translate}}</h6></div>
+  
+ 
+
+     <div class="col-sm-12"><h6>{{'pages.categories.edit.type_day' | translate}}</h6></div>
+     <div class="col-sm-12"><span>{{'pages.categories.edit.select' | translate}}</span></div>
+     
+     <div *ngFor="let dia of dias;let i = index" class="col-sm-12 row" style="margin-top: 15px;">
+      <div class="col-sm-12 row">
+        <div class="col-sm-4">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'pages.categories.edit.day' | translate}}</mat-label>
+            <mat-select  [(ngModel)] = "dia.dia" [ngModelOptions]="{standalone: true}" >
+              <mat-option *ngFor="let day of dayList" [value]="day" [disabled]="daySelected(day)">{{day | days}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'pages.categories.edit.type' | translate}}</mat-label>
+            <mat-select  [(ngModel)] = "dia.tipo" [ngModelOptions]="{standalone: true}" >
+              <mat-option *ngFor="let tipo of tipos" [value]="tipo">{{tipo | ejercicio}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-2">
+     
+            <button mat-raised-button class="futxtrm-color-dorado " matTooltip="{{'pages.categories.edit.add' | translate}}"  (click)="addDia()" *ngIf="(dias.length == 1 && i == 0) || (dias.length == 2 && i == 1) || (dias.length == 3 && i == 2)"><mat-icon>add</mat-icon></button>
+
+        
+        
+        </div>
+        <div class="col-sm-2">
+      
+            <button mat-raised-button class="futxtrm-color-dorado" matTooltip="{{'pages.categories.edit.remove' | translate}}"  *ngIf="dias.length > 1" (click)="removeDia(i)"><mat-icon>remove</mat-icon></button>
+
+
+        </div>
+  
+      </div>
+
+    </div>
+
+   
+   </div>
+   
+   
+ 
+    <mat-form-field appearance="outline">
+      <mat-label>{{'pages.categories.edit.description' | translate}}</mat-label>
+      <textarea matInput  formControlName="descripcion"></textarea>
+    </mat-form-field>
+
+    <mat-form-field  appearance ="outline">
+      <mat-label>{{'pages.categories.edit.image' | translate}}</mat-label>
+      <input matInput readonly type="text" formControlName="imagen" disabled>
+      <input hidden type="file" #uploaderI accept="image/*" (change)="subirImagen($event)"/>
+    
+      <mat-icon matSuffix (click)="uploaderI.click()"  class="upload-icon">add_photo_alternate</mat-icon>
+    </mat-form-field>
+
+    
+    <div>
+    
+  
+      <div *ngIf="url != null && categoriaForm.controls.imagen.value != ''">
+        <img src="{{url}}" alt="" height="220" width="360" class="imagen-upload">
+      </div>
+    </div>
+</form>
+  </div>
+<div mat-dialog-actions class="margin-actions float-right">
+  <button mat-button (click)="onNoClick()" tabindex="-1"  class="margin-button-5 futxtrm-color-gris">{{'pages.categories.edit.cancel' | translate}} <mat-icon>cancel</mat-icon></button>
+  <button mat-button (click)="aceptar()" tabindex="-1"  class="margin-button-5 futxtrm-color-dorado" [disabled]="categoriaForm.invalid" >{{'pages.categories.edit.update' | translate}} <mat-icon>edit</mat-icon></button>
+</div>

@@ -1,0 +1,20 @@
+<div class="color-dorado">
+  <h1 >
+    {{'user.templates.title' | translate}}
+  </h1>
+</div>
+
+<div class="row">
+  <div *ngFor="let plantilla of plantillas" class="col-md-6 col-sm-12" >
+    <div   class="plantilla"> 
+      <h4 class="color-blanco">{{'user.templates.name' | translate}}: {{plantilla.plantilla.nombre}}</h4>
+      <h6 class="color-blanco">{{'user.templates.categorie' | translate}}: {{plantilla.categoria.nombre}}</h6>
+      <h6 class="color-blanco">{{'user.templates.date_create' | translate}}: {{plantilla.fecha | fecha}}</h6>
+      <h6 class="color-blanco">{{'user.templates.date_training' | translate}}: {{plantilla.dia | fecha}}</h6>
+      <button mat-raised-button (click)="verPlantilla(plantilla.plantilla._id)" class="futxtrm-color-gris color-blanco see">{{'user.templates.button' | translate}} <mat-icon>article</mat-icon></button>
+      <mat-icon class="delete" (click)="borrar(plantilla.plantilla._id)">delete</mat-icon>
+    </div>
+  </div>
+  
+</div>
+

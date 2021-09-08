@@ -1,0 +1,170 @@
+<!-- ============================================================== -->
+<!-- Simple four boxes Row -->
+<!-- ============================================================== -->
+<div fxLayout="row wrap">
+  <!-- column -->    
+
+<!-- ============================================================== -->
+<!-- Image Card row-->
+<!-- ============================================================== -->
+<div fxLayout="row wrap" fxFlex="100">
+  <!-- Card column -->
+  <div fxFlex.gt-md="35" fxFlex.gt-xs="100" fxFlex="100">
+      <mat-card class="oh text-center little-profile futxtrm-color-negro color-blanco">
+          <img mat-card-image src="assets/images/background/profile-bg.jpg" alt="Photo of a Shiba Inu">
+          <mat-card-content>
+              <div class="pro-img">
+                  <img *ngIf="usuario" src={{usuario.url}} width="100" alt="user" class="img-circle">
+              </div>
+              <h3 class="m-b-0"  *ngIf="usuario" >{{usuario.nombre}} {{usuario.apellido}}</h3>
+              <h6 class="m-t-0 ">{{formatRole(usuario.role)}}</h6>
+            <mat-divider ></mat-divider>
+      
+              <div fxLayout="column" fxLayoutWrap="wrap" class="m-t-30" *ngIf="usuario" >
+                  <div fxLayout="row" fxFlex.gt-sm="33.33%" fxFlex.gt-xs="33.33%" fxFlex="100" class="p-t-4">
+                    <div fxLayout="column">
+                      <small fxLayout="row" class="text-muted " fxFlex="50">{{'pages.users.see.email' | translate}}</small> 
+                      <h6 class="m-0" fxLayout="row" fxFlex="50">{{usuario.email}}</h6>
+                    </div>
+              
+                      
+                  </div>
+                  <div fxLayout="row" fxFlex.gt-sm="33.33%" fxFlex.gt-xs="33.33%" fxFlex="100" class="p-t-4">
+                    <div fxLayout="column">
+                      <small fxLayout="row" class="text-muted " fxFlex="50">{{'pages.users.see.user' | translate}}</small> 
+                      <h6 class="m-0" fxLayout="row" fxFlex="50">{{usuario.username}}</h6>
+                    </div>  
+                  </div>
+              
+
+                  <div fxLayout="row" fxFlex.gt-sm="33.33%" fxFlex.gt-xs="33.33%" fxFlex="100" class="p-t-4">
+                    <div fxLayout="column">
+                      <small fxLayout="row" class="text-muted " fxFlex="50">{{'pages.users.see.phone' | translate}}</small> 
+                      <h6 class="m-0" fxLayout="row" fxFlex="50">{{usuario.telefono}}</h6>
+                    </div>
+              
+                  </div>
+                  <div fxLayout="row" fxFlex.gt-sm="33.33%" fxFlex.gt-xs="33.33%" fxFlex="100" class="p-t-4">
+                    <div fxLayout="column">
+                      <small fxLayout="row" class="text-muted " fxFlex="50">{{'pages.users.see.address' | translate}}</small> 
+                      <h6 class="m-0" fxLayout="row" fxFlex="50">{{usuario.direccion}}</h6>
+                    
+                    </div>
+              
+                  </div>
+             
+            
+              </div>
+          </mat-card-content>
+      </mat-card>
+
+     
+  </div>
+  <!-- Card column -->
+  <!-- Card column -->
+  <div  fxFlex.gt-md="65" fxFlex.gt-xs="100" fxFlex="100">
+      <mat-card class="futxtrm-color-negro color-blanco">
+          <mat-tab-group>
+              <!-- Tab 1 -->
+              <mat-tab label="{{'pages.users.see.profile.title' | translate}}" class="color-blanco">
+                  <mat-card-content class="perfil-content" *ngIf="usuario">
+                    <form [formGroup]="perfilForm">
+                      <div class="row"> 
+                        <div  class="col-sm-12 col-md-3" >
+                          <div class="pro-img" *ngIf="usuario"  class="text-center">
+                            <div class="text-center" >
+                             
+                              <img src={{usuario.urlPerfil}} width="100" height="100" alt="user" class="img-circle" >
+                              <input hidden type="file" #uploader accept="image/*" (change)="subirImagen($event)"/>
+                              <button mat-icon-button [ngStyle]="{'margin-left':'-20px'}" (click)="uploader.click()"><mat-icon>add_photo_alternate</mat-icon></button>
+                            </div>
+                      
+              
+                          </div>
+                        </div>
+                        <div  class="col-sm-12 col-md-9 row" >
+                          <div class="col-sm-6 col-md-3 col-xs-12">
+                            <mat-form-field appearance="outline">
+                              <mat-label>{{'pages.users.see.profile.name' | translate}}</mat-label>
+                              <input matInput readonly  type="text" formControlName="nombre"> 
+                            </mat-form-field>
+                          </div>
+                          <div class="col-sm-6 col-md-3 col-xs-12">
+     
+                            <mat-form-field appearance="outline">
+                              <mat-label>{{'pages.users.see.profile.last_name' | translate}}</mat-label>
+                              <input matInput readonly type="text" formControlName="apellido"> 
+                            </mat-form-field>
+                          </div>
+
+                          <div class="col-sm-6  col-xs-12">
+                            <mat-form-field appearance="outline">
+                              <mat-label>{{'pages.users.see.profile.phone' | translate}}</mat-label>
+                              <ngx-mat-intl-tel-input
+                              
+                              [preferredCountries]="['mx', 'us']"
+                              [enablePlaceholder]="true"
+                              [enableSearch]="true"
+                              name="telefono"
+                              formControlName="telefono" #telefono></ngx-mat-intl-tel-input>
+                            </mat-form-field>
+                          </div>
+
+                         
+                       
+                          
+                            <div class="col-sm-12 col-md-4">
+                              <mat-form-field  class="input" appearance ="outline">
+                                <mat-label>{{'pages.users.see.profile.country' | translate}}</mat-label>
+                                <input matInput readonly type="text" formControlName="pais"> 
+
+                                       
+                              </mat-form-field>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                              <mat-form-field  class="input" appearance ="outline">
+                                <mat-label>{{'pages.users.see.profile.state' | translate}}</mat-label>
+                                <input matInput readonly type="text" formControlName="estado"> 
+             
+                              </mat-form-field>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                              <mat-form-field  class="input" appearance ="outline">
+                                <mat-label>{{'pages.users.see.profile.city' | translate}}</mat-label>
+                                <input matInput readonly type="text" formControlName="ciudad"> 
+           
+                              </mat-form-field>
+                            </div>
+                         
+                          
+                          
+                        
+                          <div class="col-sm-12">
+                           
+                              <mat-form-field appearance="outline">
+                                <mat-label>{{'pages.users.see.profile.address' | translate}}</mat-label>
+                                <input matInput type="text" formControlName="direccion">
+                              </mat-form-field>
+                           
+                          
+                          </div>
+                          
+                        </div>
+                       
+                      </div>
+                   
+                      <div class="save-perfil">
+                        <button mat-raised-button [ngStyle]="{'margin-right':'20px'}"   routerLink="/admin/usuarios/usuarios" >{{'pages.users.see.profile.back' | translate}}</button>
+                      </div>
+                   
+                    </form>
+                  
+                 
+                  </mat-card-content>
+              </mat-tab>  
+           
+             
+          </mat-tab-group>
+      </mat-card>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{ "pages.home.welcome" | translate }} {{ userService.user?.nombre }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-sm-12 col-lg-3">
+    <div class="plantilla">
+      <h1 class="color-blanco">{{ usuarios }}</h1>
+      <h6 class="color-blanco">{{ "pages.home.registered" | translate }}</h6>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-12 col-lg-3">
+    <div class="plantilla">
+      <h1 class="color-blanco">{{ categorias }}</h1>
+      <h6 class="color-blanco">{{ "pages.home.available" | translate }}</h6>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-12 col-lg-3">
+    <div class="plantilla">
+      <h1 class="color-blanco">{{ pagos }}</h1>
+      <h6 class="color-blanco">{{ "pages.home.payments" | translate }}</h6>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-12 col-lg-3">
+    <div class="plantilla">
+      <h1 class="color-blanco">$ {{ monto }}</h1>
+      <h6 class="color-blanco">{{ "pages.home.total" | translate }}</h6>
+    </div>
+  </div>
+</div>

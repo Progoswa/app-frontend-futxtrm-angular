@@ -1,0 +1,55 @@
+<h2 mat-dialog-title class="text-center margin-button-5 color-dorado">
+  {{ "pages.sections.see.title" | translate }} {{ data.nombre }}
+</h2>
+<div mat-dialog-content class="text-center margin-button-5">
+  <form [formGroup]="seccionForm" class="color-blanco">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "pages.sections.see.name" | translate }}</mat-label>
+      <input matInput type="text" formControlName="nombre" readonly />
+    </mat-form-field>
+    <div style="text-align: left">
+      <mat-checkbox
+        class="example-margin"
+        formControlName="condicional"
+        disabled
+        >{{ "pages.sections.see.conditional" | translate }}</mat-checkbox
+      >
+    </div>
+    <span>{{ "pages.sections.see.blocks" | translate }}</span
+    ><br />
+
+    <div *ngFor="let bloque of bloques">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "pages.sections.see.minuts" | translate }}</mat-label>
+        <input
+          matInput
+          readonly
+          type="number"
+          pattern="^[0-9.]+$"
+          [(ngModel)]="bloque.minutos"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "pages.sections.see.amount" | translate }}</mat-label>
+        <input
+          matInput
+          readonly
+          type="number"
+          pattern="^[0-9.]+$"
+          [(ngModel)]="bloque.ejercicios"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </mat-form-field>
+      <span
+        >{{ "pages.sections.see.duration" | translate
+        }}{{ bloque.minutos * bloque.ejercicios || 0 }}</span
+      >
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "pages.sections.see.description" | translate }}</mat-label>
+      <textarea matInput formControlName="descripcion" readonly></textarea>
+    </mat-form-field>
+  </form>
+</div>

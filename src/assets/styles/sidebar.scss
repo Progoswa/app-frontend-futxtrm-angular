@@ -1,0 +1,123 @@
+/*
+Template Name: Material Pro Admin
+Author: Themedesigner
+Email: niravjoshi87@gmail.com
+File: scss
+*/
+
+/*******************
+Main sidebar
+******************/
+
+mat-sidenav {
+  width: 240px;
+  padding-top: 0px;
+}
+#snav{
+    background: #0e0e0e;
+    box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
+    .mat-list-item {
+        height: auto;
+        &:hover{
+            background: none;
+        }
+        
+        .mat-list-item-content{
+            display: block;
+            padding: 0px 7px;
+            &:hover{
+                background: none;
+                > a{
+                  color:$themecolor;
+                }
+            }
+        }
+        
+        a{
+            height: 45px;
+            padding: 0 10px;
+            margin-bottom: 10px;
+            align-items: center;
+            display: flex;
+            font-size: 15px;
+            white-space: nowrap;
+            color:$sidebar-text;
+            mat-icon:not(.dd-icon){
+                margin-right: 8px;
+            }
+            mat-icon{
+                color:$sidebar-icons;
+            }
+            .dd-icon{
+                font-size: 16px;
+                width: 16px;
+                transition: 0.2s ease-in;
+                margin: 5px 0 5px 5px;
+                height: 16px;
+            }
+        }
+        &.selected > .mat-list-item-content > a{
+         
+            border-radius: $radius;
+            color:#D0AE3Dc0;
+            
+            mat-icon{
+                color:#D0AE3Dc0
+            }
+            .dd-icon{
+                -webkit-transform: rotate(-180deg);
+                transform: rotate(-180deg);
+            }
+            
+        }
+        &.selected .sub-item .mat-list-item-content a.selected{
+            background: transparent;
+            color:$inverse;
+            font-weight: 500;               
+        }
+        .sub-item{
+            display: none;
+        }
+        &.selected .sub-item {
+            display: block;
+        }
+
+    }
+}
+/******************* 
+use profile section
+******************/
+
+.user-profile {  
+    position: relative;
+    background-size:cover;
+    
+   
+    .profile-text {
+        padding: 5px 0px;
+        position: relative;
+        cursor: pointer;
+        white-space: nowrap;
+        > a {
+            color: $white!important;
+            width: 100%;
+            padding: 6px 30px;
+            background: rgba(0, 0, 0, 0.5);
+            display: block;
+            white-space: nowrap;
+            &:after{
+                position: absolute;
+                right: 20px;
+                top:20px;
+            }
+        }
+    }
+    
+}
+
+
+.sidebar-closed #snav{
+    &.mat-sidenav ~ .mat-drawer-content {
+          margin-left: 0px!important;
+        }
+}

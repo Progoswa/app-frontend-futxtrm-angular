@@ -1,0 +1,161 @@
+<div class="registro" fxLayout="row">
+  <img alt="homepage" src="./assets/images/logo.png" width="180px" class="logo"> 
+
+  <div fxFlex.lt-md="100%"  fxFlex.gt-sm="60%"  fxFlexAlign="center" fxLayout="column" class="registro-content color-blanco black-opacity">
+    
+
+    <div fxFlex.gt-sm="50%" style="margin-top: 30px;"  >
+    
+      <div class="text-center title" >
+       
+        <h2>{{'sign_up.title' | translate}}</h2>
+      </div>
+     
+
+      <div class="form-cliente">
+        <form [formGroup]="clienteForm" class="row">
+          <div class="col-sm-12 text-center" > <h5 >{{'sign_up.personal_information' | translate}}</h5></div>
+         
+          <div class="col-sm-12 col-md-4">
+               
+          
+            <mat-form-field class="input" appearance ="outline">
+              <mat-label>{{'sign_up.name.label' | translate}}</mat-label>
+              <input matInput formControlName="nombre" placeholder="{{'sign_up.name.placeholder' | translate}}">
+              <mat-error *ngIf="clienteForm.controls.nombre.errors?.required">{{'sign_up.name.invalid.required' | translate}}</mat-error>
+              <mat-error *ngIf="clienteForm.controls.nombre.errors?.pattern">{{'sign_up.name.invalid.pattern' | translate}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <mat-form-field class="input" appearance ="outline">
+              <mat-label>{{'sign_up.last_name.label' | translate}}</mat-label>
+              <input matInput formControlName="apellido" placeholder="{{'sign_up.last_name.placeholder' | translate}}">
+              <mat-error *ngIf="clienteForm.controls.apellido.errors?.required">{{'sign_up.last_name.invalid.required' | translate}}</mat-error>
+              <mat-error *ngIf="clienteForm.controls.apellido.errors?.pattern">{{'sign_up.last_name.invalid.pattern' | translate}}</mat-error>
+            </mat-form-field>
+            
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <mat-form-field  class="input" appearance ="outline">
+              <mat-label>{{'sign_up.phone.label' | translate}}</mat-label>
+              <!-- <input matInput type="number" formControlName="telefono"> -->
+              <ngx-mat-intl-tel-input
+              [preferredCountries]="['mx', 'us']"
+              [enablePlaceholder]="true"
+              [enableSearch]="true"
+              name="telefono"
+              formControlName="telefono" #telefono ></ngx-mat-intl-tel-input>
+              <mat-hint>Ejem. {{telefono.selectedCountry.placeHolder}}</mat-hint>
+              <mat-error *ngIf="clienteForm.controls.telefono?.errors?.required">{{'sign_up.phone.invalid.required' | translate}}</mat-error>
+              <mat-error *ngIf="clienteForm.controls.telefono?.errors?.validatePhoneNumber">{{'sign_up.phone.invalid.pattern' | translate}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <mat-form-field class="input" appearance ="outline">
+              <mat-label>{{'sign_up.country.label' | translate}}</mat-label>
+              <mat-select formControlName="pais" class="color-blanco" (selectionChange)="getEstados($event.value)">
+                <mat-option *ngFor="let pais of paises" [value]="pais">
+                  {{pais.name}}
+                </mat-option>
+             
+              </mat-select>  
+              <mat-error *ngIf="clienteForm.controls.pais.errors?.required">{{'sign_up.country.invalid.required' | translate}}</mat-error>
+     
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <mat-form-field class="input" appearance ="outline">
+              <mat-label>{{'sign_up.state.label' | translate}}</mat-label>
+              <mat-select formControlName="estado" class="color-blanco">
+                <mat-option *ngFor="let estado of estados" [value]="estado.name" (onSelectionChange)="getCitys(estado)">
+                  {{estado.name}}
+                </mat-option>
+             
+              </mat-select>  
+              <mat-error *ngIf="clienteForm.controls.estado.errors?.required">{{'sign_up.state.invalid.required' | translate}}</mat-error>
+            
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <mat-form-field class="input" appearance ="outline">
+              <mat-label>{{'sign_up.city.label' | translate}}</mat-label>
+
+               <input matInput formControlName="ciudad" >
+
+              <mat-error *ngIf="clienteForm.controls.ciudad.errors?.required">{{'sign_up.city.invalid.required' | translate}}</mat-error>
+          
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12" >
+            <mat-form-field fxFlex="100%" class="input" appearance ="outline">
+              <mat-label>{{'sign_up.address.label' | translate}}</mat-label>
+              <input matInput  formControlName="direccion">
+              <mat-error *ngIf="clienteForm.controls.direccion.errors?.required">{{'sign_up.address.invalid.required' | translate}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 text-center" > <h5 >{{'sign_up.access_data' | translate}}</h5></div>
+          <div class="col-sm-12 col-md-6">
+            <mat-form-field fxFlex.gt-sm="100%" fxFlex.lt-sm="100%" class="input" appearance ="outline">
+              <mat-label>{{'sign_up.email.label' | translate}}</mat-label>
+              <input matInput formControlName="email" placeholder="{{'sign_up.email.placeholder' | translate}}">
+              <mat-error *ngIf="clienteForm.controls.email.errors?.required">{{'sign_up.email.invalid.required' | translate}}</mat-error>
+              <mat-error *ngIf="clienteForm.controls.email.errors?.pattern">{{'sign_up.email.invalid.pattern' | translate}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <mat-form-field  class="input" appearance ="outline">
+              <mat-label>{{'sign_up.user.label' | translate}}</mat-label>
+              <input matInput  formControlName="username" placeholder="{{'sign_up.user.placeholder' | translate}}">
+              <mat-error *ngIf="clienteForm.controls.username.errors?.required">{{'sign_up.user.invalid.required' | translate}}</mat-error>
+             
+            </mat-form-field>
+          </div>
+        
+          <div class="col-sm-12 col-md-6">
+            <mat-form-field  class="input" appearance ="outline">
+              <mat-label>{{'sign_up.password.label' | translate}}</mat-label>
+              <input matInput type="password" formControlName="password">
+              <mat-error *ngIf="clienteForm.controls.password.errors?.required">{{'sign_up.password.invalid.required' | translate}}</mat-error>
+              <mat-error *ngIf="clienteForm.controls.password.errors?.pattern">{{'sign_up.password.invalid.pattern' | translate}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <mat-form-field  class="input" appearance ="outline">
+              <mat-label>{{'sign_up.repeat_password.label' | translate}}</mat-label>
+              <input matInput type="password"  formControlName="rpassword">
+              <mat-error *ngIf="clienteForm.controls.rpassword.errors?.required">{{'sign_up.repeat_password.invalid.required' | translate}}</mat-error>
+              <mat-error *ngIf="clienteForm.controls.rpassword.errors?.minlength">{{'sign_up.repeat_password.invalid.pattern' | translate}}</mat-error>
+              <mat-error *ngIf="clienteForm.controls.rpassword.errors?.repeatInvalid">{{'sign_up.repeat_password.invalid.repeat_invalid' | translate}}</mat-error>
+            </mat-form-field>
+          </div>
+        
+     
+       
+
+      <div class="sm-col-12" style="width: 100%;text-align: -webkit-center;">
+        <re-captcha style="align-self: center;" (resolved)="resolved($event)" 
+        formControlName="recaptchaReactive" 
+        siteKey="6Ldue7MZAAAAAHBPUsHHrlyXWLnECqkvSMokceS8">  
+      </re-captcha>  
+      </div>
+       
+      
+          <button   mat-raised-button color="primary"  class="register-button mt-4 futxtrm-color-dorado color-blanco" [disabled]="clienteForm.invalid"  (click)="register()">{{'sign_up.sign_up' | translate}} <mat-icon>send</mat-icon></button>
+        </form>
+  
+      </div>
+    
+      
+
+      <hr class="hr-text" data-content="">
+      <div class="text-center mb-4">
+        <a class="link color-dorado" routerLink="/ingresa">{{'sign_up.have_account' | translate}}</a>
+      </div>
+
+    </div>
+  
+  </div>
+
+
+</div>
+

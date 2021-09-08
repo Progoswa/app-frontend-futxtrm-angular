@@ -1,0 +1,71 @@
+        
+<!-- ============================================================== -->
+<!-- Profile - style you can find in header.scss -->
+<!-- ============================================================== -->
+
+<div *ngIf='usuario'>
+    <button class="lang "  mat-raised-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <img src="./assets/flags/{{translate.currentLang}}.png" width="24px" alt=""> 
+        <span>    {{translate.currentLang}}</span>
+      </button>
+      <mat-menu class="lang" #menu="matMenu">
+        <button mat-menu-item class="lang" *ngFor="let language of translate.getLangs()" (click)="switchLang(language)"> 
+          <img src="./assets/flags/{{language}}.png" width="24px" alt=""> 
+          <span> {{ language }} </span>
+        </button>
+     
+      </mat-menu>
+
+
+    <button [matMenuTriggerFor]="notifications" mat-icon-button class="m-r-5" [ngStyle]="{'margin-right':'20px'}"> <mat-icon matBadge={{nuevos}} matBadgePosition="above after">notifications</mat-icon> </button>
+    <mat-menu #notifications="matMenu" class="mymegamenu" style="width: 300px !important;">
+        <div class="notification-header" fxLayout="row">
+        {{'header.admin.notifications.title' | translate}}
+    
+   </div>
+   <mat-divider></mat-divider>
+  <div class="notificaciones-list">
+   <div mat-menu-item *ngFor="let notificacion of notificaciones" (click)="verNotificacion(notificacion)"  [ngClass]="{'no-visto': !notificacion.visto}">
+      
+       <span matBadge="" matBadgePosition="above before"> {{notificacion.mensaje}}</span>
+   </div>
+ 
+  </div>
+  <mat-divider></mat-divider>
+   <a mat-menu-item  [ngStyle]="{'text-align':'center'}" routerLink="/admin/notificaciones">
+    {{'header.admin.notifications.all' | translate}}
+   </a>
+</mat-menu>
+
+
+    <button  [matMenuTriggerFor]="profile" mat-icon-button class="m-r-5"> <img  src={{usuario.url}} alt="user" class="profile-pic"> </button>
+    <mat-menu #profile="matMenu" class="mymegamenu" >
+        <div class="profile-header" fxLayout="row">
+            <div  fxFlex="25">
+                <img src={{usuario.url}} alt="" width="50px" height="50px" class="profile-img">
+            </div>
+            <div fxFlex="75">
+                <div fxLayout="column" *ngIf="usuario">
+                    <h6 fxLayout="row" fxFlex="100" class="profile-name">{{usuario.nombre}} {{usuario.apellido}}</h6>
+                    <p fxLayout="row" fxFlex="100" class="profile-email">{{usuario.email}}</p>
+                </div>
+            </div>
+           
+         
+        </div>
+        <mat-divider></mat-divider>
+        <button mat-menu-item routerLink="/admin/perfil">
+            <mat-icon>person</mat-icon>  {{'header.admin.user.profile' | translate}} </button>
+        <!-- <button mat-menu-item>
+            <mat-icon>notifications_off</mat-icon> Disable notifications </button> -->
+
+        <button mat-menu-item routerLink="/admin/notificaciones">
+            <mat-icon matBadge={{nuevos}} matBadgePosition="above after">notifications</mat-icon> {{'header.admin.user.notifications' | translate}}  </button>
+            <mat-divider></mat-divider>
+        <button mat-menu-item (click)="salir()">
+            <mat-icon>exit_to_app</mat-icon> {{'header.admin.user.logout' | translate}}  </button>
+    </mat-menu>
+    
+</div>
+
+

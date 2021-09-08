@@ -1,0 +1,245 @@
+<div class="color-dorado">
+  <h3 *ngIf="categoria">
+    {{ "user.calendar.template.title" | translate }} {{ categoria.nombre }}
+  </h3>
+  <h5 *ngIf="categoria">
+    {{ formatDate(calendario.dia) }} ({{ calendario.condicional | ejercicio }})
+  </h5>
+</div>
+
+<div *ngFor="let seccion of secciones" class="secciones">
+  <h5 class="color-dorado">
+    {{ seccion.seccion.nombre }}
+    <mat-icon style="vertical-align: middle">{{
+      seccionCheck(seccion.seccion._id) ? "check" : "remove"
+    }}</mat-icon>
+  </h5>
+  <p class="color-blanco">{{ seccion.seccion.descripcion }}</p>
+
+  <div class="color-blanco">
+    <mat-radio-group
+      *ngIf="seccion.seccion.bloques.length > 1"
+      aria-label="Select an option"
+      fxLayout="column"
+      [(ngModel)]="seccion.bloque"
+    >
+      <mat-radio-button
+        *ngFor="let bloque of seccion.seccion.bloques; let i = index"
+        [value]="bloque"
+        (change)="changeBloque(bloque, seccion.seccion._id)"
+        [checked]="i == 0"
+        >{{ bloque.ejercicios }} ejercicios de
+        {{ bloque.minutos }} minutos</mat-radio-button
+      >
+    </mat-radio-group>
+    <span *ngIf="seccion.seccion.bloques.length == 1"
+      >{{ seccion.bloque.ejercicios }}
+      {{ "user.calendar.template.exercises" | translate }}
+      {{ seccion.bloque.minutos }}
+      {{ "user.calendar.template.minutes" | translate }}
+    </span>
+  </div>
+
+  <div class="entrenamientos" fxLayout="row">
+    <div *ngIf="!seccion.seccion.condicional">
+      <div
+        *ngFor="let entrenamiento of seccion.entrenamientos"
+        class="entrenamientodiv"
+      >
+        <mat-card class="entrenamiento" style="background: inherit !important">
+          <div class="text-center color-blanco description">
+            <span>{{ entrenamiento.entrenamiento.ejercicio }}</span>
+          </div>
+
+          <div
+            *ngIf="entrenamiento.entrenamiento.formato == 'mp4'"
+            style="width: 100%; height: 100%"
+          >
+            <video
+              width="100%"
+              height="100%"
+              controls
+              controlsList="nodownload"
+            >
+              <source
+                src="{{ url }}/{{ entrenamiento.entrenamiento.video }}"
+                type="video/mp4"
+              />
+              <source
+                src="{{ url }}/{{ entrenamiento.entrenamiento.video }}"
+                type="video/ogg"
+              />
+              <source
+                src="{{ url }}/{{ entrenamiento.entrenamiento.video }}"
+                type="video/webm"
+              />
+              Your browser does not support the video tag.
+            </video>
+            <button
+              mat-mini-fab
+              [matTooltip]="
+                entrenamientoSelected(seccion.seccion._id, entrenamiento._id)
+                  ? 'Remover'
+                  : 'Seleccionar'
+              "
+              class="select-button"
+              [ngClass]="
+                entrenamientoSelected(seccion.seccion._id, entrenamiento._id)
+                  ? 'futxtrm-color-dorado'
+                  : 'futxtrm-color-rojo'
+              "
+              aria-label="Example icon button with a menu icon"
+              (click)="addToPlantilla(seccion.seccion._id, entrenamiento._id)"
+            >
+              <mat-icon>{{
+                entrenamientoSelected(seccion.seccion._id, entrenamiento._id)
+                  ? "check"
+                  : "add"
+              }}</mat-icon>
+            </button>
+          </div>
+          <div *ngIf="entrenamiento.entrenamiento.formato == 'vimeo'">
+            <div style="padding: 80% 0 0 0; position: relative">
+              <iframe
+                [src]="entrenamiento.entrenamiento.id_vimeo | vimeo"
+                style="
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                "
+                frameborder="0"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <script src="https://player.vimeo.com/api/player.js"></script>
+            <button
+              mat-mini-fab
+              mattola
+              class="select-button"
+              [ngClass]="
+                entrenamientoSelected(seccion.seccion._id, entrenamiento._id)
+                  ? 'futxtrm-color-dorado'
+                  : 'futxtrm-color-rojo'
+              "
+              aria-label="Example icon button with a menu icon"
+              (click)="addToPlantilla(seccion.seccion._id, entrenamiento._id)"
+            >
+              <mat-icon>{{
+                entrenamientoSelected(seccion.seccion._id, entrenamiento._id)
+                  ? "check"
+                  : "add"
+              }}</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+    <div *ngIf="seccion.seccion.condicional">
+      <div
+        *ngFor="let entrenamiento of seccion.entrenamientos"
+        class="entrenamientodiv"
+      >
+        <mat-card
+          *ngIf="entrenamiento.entrenamiento.tipo == calendario.condicional"
+          class="entrenamiento"
+          style="background: inherit !important"
+        >
+          <div class="text-center color-blanco description">
+            <span>{{ entrenamiento.entrenamiento.ejercicio }}</span>
+          </div>
+          <div
+            *ngIf="entrenamiento.entrenamiento.formato == 'mp4'"
+            style="width: 100%; height: 100%"
+          >
+            <video
+              width="100%"
+              height="100%"
+              controls
+              controlsList="nodownload"
+            >
+              <source
+                src="{{ url }}/{{ entrenamiento.entrenamiento.video }}"
+                type="video/mp4"
+              />
+              <source
+                src="{{ url }}/{{ entrenamiento.entrenamiento.video }}"
+                type="video/ogg"
+              />
+              <source
+                src="{{ url }}/{{ entrenamiento.entrenamiento.video }}"
+                type="video/webm"
+              />
+              Your browser does not support the video tag.
+            </video>
+            <button
+              mat-mini-fab
+              class="select-button"
+              [ngClass]="
+                entrenamientoSelected(seccion.seccion._id, entrenamiento._id)
+                  ? 'futxtrm-color-dorado'
+                  : 'futxtrm-color-rojo'
+              "
+              aria-label="Example icon button with a menu icon"
+              (click)="addToPlantilla(seccion.seccion._id, entrenamiento._id)"
+            >
+              <mat-icon>{{
+                entrenamientoSelected(seccion.seccion._id, entrenamiento._id)
+                  ? "check"
+                  : "add"
+              }}</mat-icon>
+            </button>
+          </div>
+          <div *ngIf="entrenamiento.entrenamiento.formato == 'vimeo'">
+            <div style="padding: 80% 0 0 0; position: relative">
+              <iframe
+                [src]="uploadVimeo(entrenamiento.entrenamiento.id_vimeo)"
+                style="
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                "
+                frameborder="0"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <script src="https://player.vimeo.com/api/player.js"></script>
+            <button
+              mat-mini-fab
+              class="select-button"
+              [ngClass]="
+                entrenamientoSelected(seccion.seccion._id, entrenamiento._id)
+                  ? 'futxtrm-color-dorado'
+                  : 'futxtrm-color-rojo'
+              "
+              aria-label="Example icon button with a menu icon"
+              (click)="addToPlantilla(seccion.seccion._id, entrenamiento._id)"
+            >
+              <mat-icon>{{
+                entrenamientoSelected(seccion.seccion._id, entrenamiento._id)
+                  ? "check"
+                  : "add"
+              }}</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-bottom: 60px"></div>
+<button
+  mat-fab
+  class="futxtrm-color-dorado add-button"
+  matTooltip="{{ 'user.calendar.template.generate' | translate }}"
+  (click)="generarPlantilla()"
+>
+  <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+</button>

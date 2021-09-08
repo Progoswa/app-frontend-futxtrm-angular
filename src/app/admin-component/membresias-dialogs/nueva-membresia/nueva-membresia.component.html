@@ -1,0 +1,72 @@
+<h2 mat-dialog-title class="text-center margin-button-5 color-dorado">{{'pages.membership.new.title' | translate}}</h2>
+<div mat-dialog-content class="text-center margin-button-5">
+<form class="color-blanco" [formGroup]="membresiaForm">
+
+
+ <div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{'pages.membership.new.name' | translate}}</mat-label>
+    <input matInput formControlName="name" #name [value]="name.value[0]?.toUpperCase()" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>{{'pages.membership.new.description' | translate}}</mat-label>
+    <input matInput formControlName="description" #d [value]="d.value[0]?.toUpperCase()">
+  </mat-form-field>
+
+  <mat-form-field  appearance ="outline">
+    <mat-label>{{'pages.membership.new.image' | translate}}</mat-label>
+    <input matInput readonly type="text" formControlName="image" disabled>
+    <input hidden type="file" #uploaderI accept="image/*" (change)="subirImagen($event)"/>
+  
+    <mat-icon matSuffix (click)="uploaderI.click()"  class="upload-icon">add_photo_alternate</mat-icon>
+  </mat-form-field>
+  <div>
+    
+  
+    <div *ngIf="url != null && membresiaForm.controls.image.value != ''">
+      <img src="{{url}}" alt="" height="220" width="360" class="imagen-upload">
+    </div>
+  </div>
+ 
+
+  <mat-form-field appearance="outline" style="margin-top: 15px;">
+    <mat-label>{{'pages.membership.new.categories' | translate}}</mat-label>
+    <mat-select formControlName="categorias" multiple>
+      <mat-option *ngFor="let categoria of categorias" [value]="categoria._id" >{{categoria.nombre}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  <div class="row">
+    <div class="col-sm-12"><h5>{{'pages.membership.new.prices' | translate}}</h5></div>
+  </div>
+    <div class="row" *ngFor="let precio of prices">
+      <div class="col-sm-4">
+        <h5 style="margin-top: 15px;">{{precio.meses}} {{(precio.meses == 1)?translate.instant('pages.membership.new.month'):translate.instant('pages.membership.new.months')}}</h5>
+      </div>
+      <mat-form-field class="col-sm-4" appearance="outline">
+        <mat-label>{{'pages.membership.new.price' | translate}}</mat-label>
+        <span matPrefix style="vertical-align: super;">$ &nbsp;</span>
+    
+        <input matInput type="number" pattern="^[0-9.]+$" [(ngModel)] = "precio.precio" [ngModelOptions]="{standalone: true}" >
+      </mat-form-field>
+      <mat-form-field class="col-sm-4" appearance="outline">
+        <mat-label>{{'pages.membership.new.discount' | translate}}</mat-label>
+        <span matPrefix style="vertical-align: super;">% &nbsp;</span>
+    
+        <input matInput type="number" pattern="^[0-9.]+$" [(ngModel)] = "precio.descuento" [ngModelOptions]="{standalone: true}" >
+      </mat-form-field>
+  
+    </div>
+
+
+
+</div> 
+
+</form>
+  </div> 
+<div mat-dialog-actions class="margin-actions float-right">
+  <button mat-button (click)="onNoClick()" tabindex="-1"  class="margin-button-5 futxtrm-color-gris">{{'pages.membership.new.cancel' | translate}} <mat-icon>cancel</mat-icon></button>
+  <button mat-button (click)="aceptar()" [disabled]="membresiaForm.invalid || !pricesOk()" tabindex="-1"  class="margin-button-5 futxtrm-color-dorado" >{{'pages.membership.new.create' | translate}} <mat-icon>add</mat-icon></button>
+</div>

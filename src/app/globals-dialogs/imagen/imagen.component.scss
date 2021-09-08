@@ -1,0 +1,9 @@
+.imagen{
+    max-height: 80vh;
+    border-radius: 5px;
+}
+
+
+::ng-deep .mat-dialog-container{
+    padding: 2px !important;
+}

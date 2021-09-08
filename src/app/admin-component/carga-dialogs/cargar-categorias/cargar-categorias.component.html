@@ -1,0 +1,22 @@
+<h2 mat-dialog-title class="text-center margin-button-5 color-dorado">{{'pages.bulk_load.categorie.load.title' | translate}}</h2>
+<div mat-dialog-content class="text-center margin-button-5">
+<form class="color-blanco">
+
+
+<div>
+
+  <mat-form-field  appearance ="outline" class="color-blanco">
+    <mat-label>{{'pages.bulk_load.categorie.load.select' | translate}}</mat-label>
+    <input matInput readonly [(ngModel)]="name" [ngModelOptions]="{standalone: true}"  type="text">
+    <input hidden type="file" #uploaderI accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" (change)="seleccionarArchivo($event)"/>
+  
+    <mat-icon matSuffix (click)="uploaderI.click()"  class="upload-icon">attach_file</mat-icon>
+  </mat-form-field>
+</div> 
+
+</form>
+  </div> 
+<div mat-dialog-actions class="margin-actions float-right">
+  <button mat-button (click)="onNoClick()" tabindex="-1"  class="margin-button-5 futxtrm-color-gris">{{'pages.bulk_load.categorie.load.cancel' | translate}} <mat-icon>cancel</mat-icon></button>
+  <button mat-button (click)="aceptar()" tabindex="-1" [disabled]="name == ''" class="margin-button-5 futxtrm-color-dorado" >{{'pages.bulk_load.categorie.load.load' | translate}} <mat-icon>cloud_upload</mat-icon></button>
+</div>

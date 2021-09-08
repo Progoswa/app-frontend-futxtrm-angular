@@ -1,0 +1,90 @@
+<h2 mat-dialog-title class="text-center margin-button-5 color-dorado">{{'pages.categories.see.tilte' | translate}} {{data.nombre}}</h2>
+<div mat-dialog-content class="text-center margin-button-5">
+<form [formGroup]="categoriaForm" class="color-blanco">
+<div>
+  <h6>{{'pages.categories.see.data' | translate}}</h6>
+  <mat-form-field appearance="outline">
+    <mat-label>{{'pages.categories.see.name' | translate}}</mat-label>
+    <input matInput readonly type="text" formControlName="nombre">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{'pages.categories.see.frequency' | translate}}</mat-label>
+    <input matInput readonly type="text" formControlName="frecuencia">
+  </mat-form-field>
+
+
+  <div class="row">
+    <div class="col-sm-12"><h5>{{'pages.categories.see.prices' | translate}}</h5></div>
+  </div>
+    <div class="row" *ngFor="let precio of precios">
+      <div class="col-sm-4">
+        <h3 style="margin-top: 15px;">{{precio.meses}} {{(precio.meses == 1)?translate.instant('pages.categories.see.month'):translate.instant('pages.categories.see.months')}}</h3>
+      </div>
+      <mat-form-field class="col-sm-4" appearance="outline">
+        <mat-label>{{'pages.categories.see.price' | translate}}</mat-label>
+        <span matPrefix style="vertical-align: super;">$ &nbsp;</span>
+    
+        <input matInput type="number" pattern="^[0-9.]+$" [(ngModel)] = "precio.precio" [ngModelOptions]="{standalone: true}" >
+      </mat-form-field>
+      <mat-form-field class="col-sm-4" appearance="outline">
+        <mat-label>{{'pages.categories.see.discount' | translate}}</mat-label>
+        <span matPrefix style="vertical-align: super;">% &nbsp;</span>
+    
+        <input matInput type="number" pattern="^[0-9.]+$" [(ngModel)] = "precio.descuento" [ngModelOptions]="{standalone: true}" >
+      </mat-form-field>
+  
+    </div>
+
+
+</div>
+   
+
+   <div class="row">
+     
+     <div class="col-sm-12"><h6>{{'pages.categories.see.default' | translate}}</h6></div>
+  
+    
+    
+
+     <div class="col-sm-12"><h6>{{'pages.categories.see.type_day' | translate}}</h6></div>
+     
+     <div *ngFor="let dia of dias;let i = index" class="col-sm-12 row" style="margin-top: 15px;">
+      <div class="col-sm-12 row">
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'pages.categories.see.day' | translate}}</mat-label>
+            <mat-select  [(ngModel)] = "dia.dia" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let day of dayList" [value]="day"  disabled>{{day | days}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'pages.categories.see.type' | translate}}</mat-label>
+            <mat-select  [(ngModel)] = "dia.tipo" [ngModelOptions]="{standalone: true}" >
+              <mat-option *ngFor="let tipo of tipos" [value]="tipo" disabled>{{tipo | ejercicio}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+  
+      </div>
+
+    </div>
+
+   
+   </div>
+   
+   
+ 
+    <mat-form-field appearance="outline">
+      <mat-label>{{'pages.categories.see.description' | translate}}</mat-label>
+      <textarea matInput readonly  formControlName="descripcion"></textarea>
+    </mat-form-field>
+
+    <div *ngIf="url != null && categoriaForm.controls.imagen.value != ''">
+      <img src="{{url}}" alt="" height="220" width="360" class="imagen-upload">
+    </div>
+ 
+</form>
+  </div>

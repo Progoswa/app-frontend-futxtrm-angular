@@ -1,0 +1,11 @@
+[1109/112354.607:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)
+[1110/003516.325:ERROR:process_info.cc(329)] VirtualQueryEx: Acceso denegado. (0x5)
+[1110/003516.325:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[1110/003516.325:ERROR:process_memory_win.cc(39)] Failed to initialize ProcessInfo.
+[1110/003516.325:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[1110/003516.330:ERROR:exception_snapshot_win.cc(99)] thread ID 38508 not found in process
+[1110/003516.325:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Se intentó obtener acceso a un proceso que está cerrándose. (0xc000010a)
+[1110/003516.330:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Se intentó obtener acceso a un proceso que está cerrándose. (0xc000010a)
+[1110/003516.330:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[1110/003516.330:ERROR:exception_snapshot_win.cc(99)] thread ID 48828 not found in process
+[1110/003516.330:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Se intentó obtener acceso a un proceso que está cerrándose. (0xc000010a)

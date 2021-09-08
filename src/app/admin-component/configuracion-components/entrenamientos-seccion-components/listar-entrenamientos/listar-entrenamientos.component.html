@@ -1,0 +1,51 @@
+<h2 mat-dialog-title class="text-center margin-button-5 color-dorado"> Ejercicios</h2>
+<div class="row">
+  
+  <div class="col-sm-12 color-blanco">
+    <mat-form-field class="buscador" [ngClass.gt-sm]="'buscador-small'" fxLayoutAlign.gt-xs="end" appearance="outline">
+      <mat-label>Buscar</mat-label>
+      <mat-icon matPrefix class="icon-search color-blanco" >search</mat-icon>
+      <input matInput (input)="buscar($event.target.value)">
+    </mat-form-field>
+  </div>
+  <div class="col-sm-12">
+    <h6 class="color-dorado">Para Cargar Ejercicios a las Secciones, seleccione los ejercicios con un Click sobre cada video</h6>
+  
+  </div>
+</div>
+
+<div mat-dialog-content class="text-center margin-button-5 content container-entrenamiento">
+  <mat-card *ngFor="let entrenamiento of entrenamientos"  class="card-entrenamiento color-blanco" [ngClass]="(seleccionados.includes(entrenamiento._id))?'selected':''" (click)="seleccionar(entrenamiento._id)">
+    <div> <mat-icon class="seleccionado" *ngIf="seleccionados.includes(entrenamiento._id)">check</mat-icon></div>
+    <div style="text-align: left"> <span> <span style="font-weight: 500;">Ejercicio:</span> {{entrenamiento.ejercicio}}</span></div>
+    <div style="text-align: left"> <span><span style="font-weight: 500;">Repeticiones:</span> {{entrenamiento.repeticiones}}</span> <span><span style="font-weight: 500;"> Tiempo: </span> {{entrenamiento.tiempo}} min</span></div>
+    <div style="text-align: left"> <span><span style="font-weight: 500;">Descripcion:</span> {{entrenamiento.descripcion}}</span> </div>
+    <div style="text-align: left"> <span><span style="font-weight: 500;">Tipo de ejercicio:</span> {{entrenamiento.tipo}}</span> </div>
+   <div fxLayout.gt-xs="row" fxLayout.xs="column">
+    <div fxFlex.gt-xs="50">
+      <img src="{{url}}/{{entrenamiento.imagen}}" alt=""  width="90%" height="150px" >
+    </div>
+    <div fxFlex.gt-xs="50" >
+      <div *ngIf="entrenamiento.formato == 'mp4'">
+        <video width="90%" height="150px" controls controlsList="nodownload">
+          <source src="{{url}}/{{entrenamiento.video}}" type="video/mp4">
+          <source src="{{url}}/{{entrenamiento.video}}" type="video/ogg">
+          <source src="{{url}}/{{entrenamiento.video}}" type="video/webm">
+        Your browser does not support the video tag.
+        </video>
+      </div>
+      <div *ngIf="entrenamiento.formato == 'vimeo'">
+        
+        <div style="padding:56.25% 0 0 0;position:relative;"><iframe [src]="entrenamiento.id_vimeo | vimeo" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+      </div>
+     
+    </div>
+   </div>
+ 
+  </mat-card>
+  </div>
+<div mat-dialog-actions class="margin-actions">
+  <button mat-button (click)="onNoClick()" tabindex="-1"  class="margin-auto margin-button-5 futxtrm-color-gris">Cancelar</button>
+  <button mat-button (click)="aceptar()" tabindex="-1"  class="margin-auto margin-button-5 futxtrm-color-dorado"  [disabled]="seleccionados.length < 1">Cargar Ejercicios</button>
+</div>

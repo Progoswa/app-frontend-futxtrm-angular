@@ -1,0 +1,84 @@
+.success{
+    color: #1e88e5;
+}
+
+
+.text-center {
+    text-align: center;
+}
+
+.margin-auto{
+    margin: auto;
+}
+
+.margin-button-5{
+    margin-bottom: 5px;
+}
+
+.margin-top{
+    margin-top: 0;
+}
+
+
+.cargando{
+    margin-top: 30px;
+}
+.margin-actions{
+    margin-bottom: -12px !important;
+}
+.icon-search{
+    vertical-align: bottom !important;
+}
+
+.seleccionado{
+    position: absolute;
+    right: 10px;
+    color: #3594e8;
+}
+
+.selected{
+    background: #3594e821;
+}
+.card-entrenamiento{
+   
+    padding: 10px !important;
+    cursor: pointer;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 13px -7px rgba(9,9,10,1) !important;
+    -moz-box-shadow: 0px 0px 13px -7px rgba(9,9,10,1) !important;
+    box-shadow: 0px 0px 13px -7px rgba(9,9,10,1) !important;
+}
+
+.container-entrenamiento{
+    overflow: scroll;
+    height: 73%;
+}
+
+
+.content{
+    background: inherit;
+}::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: inherit;
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.527);
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(85, 85, 85, 0.575);
+  }
+
+  ::ng-deep .mat-dialog-container {
+    background-color:#0e0e0e;
+}

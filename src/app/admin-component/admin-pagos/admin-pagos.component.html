@@ -1,0 +1,179 @@
+<div >
+  <div fxLayout="row wrap"   fxLayoutAlign="center" [ngStyle]="{'margin':'auto'}">
+    <!-- column -->    
+     <div fxFlex="100">
+         <mat-card [ngStyle]="{'place-content': 'center'}" class="futxtrm-color-negro">
+          
+             <mat-card-content fxFlex="90" >
+               <div style="margin-bottom: 10px;">
+                <button mat-raised-button [ngClass]="{'futxtrm-color-dorado':option == 'categorias'}" (click)="setOption('categorias')">{{'pages.payments.categories.name' | translate}}</button>
+                <button mat-raised-button [ngClass]="{'futxtrm-color-dorado':option == 'membresias'}" (click)="setOption('membresias')" style="margin-left: 5px;">{{'pages.payments.membership.name' | translate}}</button>
+              </div>
+                <div *ngIf="option == 'categorias'"> 
+                  <div fxLayout.gt-xs="row"  fxLayout.xs="column" >
+                    <div fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%" >
+                      <h3 class="text-themecolor title">{{'pages.payments.categories.title' | translate}}</h3>
+                     </div>
+                    
+                    <div fxLayout.gt-xs="column" fxLayout.xs="row"  fxFlex.gt-xs="50%" fxFlex.xs="100%">
+     
+                      <mat-form-field class="buscador" [ngClass.gt-sm]="'buscador-small'" fxLayoutAlign.gt-xs="end" appearance="outline"> 
+      
+                        <mat-label>{{'pages.payments.categories.search' | translate}}</mat-label>
+                        <mat-icon matPrefix class="icon-search" >search</mat-icon>
+                        <input matInput (keyup)="applyFilter($event)" >
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <button mat-raised-button class="excel" (click)="generateExcel()">{{'pages.payments.categories.excel' | translate}}<mat-icon>list</mat-icon></button>
+                  <button mat-raised-button class="pdf" (click)="generatePDF()">{{'pages.payments.categories.pdf' | translate}}<mat-icon>picture_as_pdf</mat-icon></button>
+     
+                  <mat-table class="table-white" [dataSource]="dataSource" class="futxtrm-color-negro" >
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="cliente">
+                      <mat-header-cell *matHeaderCellDef  > {{'pages.payments.categories.client' | translate}} </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.usuario.nombre}} {{element.usuario.apellido}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="categoria">
+                      <mat-header-cell *matHeaderCellDef  > {{'pages.payments.categories.categorie' | translate}} </mat-header-cell>
+                      <mat-cell *matCellDef="let element">{{element.categoria.nombre}}</mat-cell>
+                     </ng-container>
+                     
+                  
+                     
+                     <ng-container matColumnDef="referencia">
+                       <mat-header-cell *matHeaderCellDef  > {{'pages.payments.categories.payment.number' | translate}} </mat-header-cell>
+                       <mat-cell *matCellDef="let element"> {{element.referencia}} </mat-cell>
+                     </ng-container>
+                     
+                  
+                    
+                     
+                    
+                  
+                  
+                    <ng-container matColumnDef="fecha">
+                      <mat-header-cell *matHeaderCellDef  > {{'pages.payments.membership.date' | translate}} </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.fecha | date:'short'}} </mat-cell>
+                    </ng-container>
+                  
+                  
+              
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="opciones">
+                      <mat-header-cell *matHeaderCellDef   [ngStyle]="{'place-content':'center'}"> {{'pages.payments.categories.options' | translate}} </mat-header-cell>
+                      <mat-cell *matCellDef="let element" [ngStyle]="{'place-content':'center'}" >
+                        <div fxLayout.gt-xs="row"  fxLayout.xs="column">
+                          <div  *ngIf="permisos.pagos_aceptar_rechazar"  fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%">
+                            <button mat-mini-fab class="futxtrm-color-dorado" [ngClass.gt-xs]="'margin-buttons-row'" [ngClass.xs]="'margin-buttons-col'" matTooltip="{{'pages.payments.categories.tooltip.check' | translate}}"  matTooltipPosition="above" (click)="consultar(element._id,'c')">
+                              <mat-icon aria-label="Example icon-button with a heart icon" >info</mat-icon>
+                            </button>                      
+                          </div>
+                          <div *ngIf="permisos.pagos_eliminar" fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%"  >                  
+                            <button  mat-mini-fab class="futxtrm-color-rojo" matTooltip="{{'pages.payments.categories.tooltip.delete' | translate}}"  [ngClass.gt-xs]="'margin-buttons-row'" [ngClass.xs]="'margin-buttons-col'" matTooltipPosition="above" (click)="eliminar(element._id,'c')">
+                              <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                       
+                      </mat-cell>
+                    
+                    </ng-container>
+                  
+                    <!-- Symbol Column -->
+                   
+                  
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row;  let even = even; columns: displayedColumns;"  [ngClass]="{gray: even}"></mat-row>
+                  </mat-table>
+                  <mat-paginator  class="futxtrm-color-negro color-blanco" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+   
+                </div>
+                <div *ngIf="option == 'membresias'">
+                  <div fxLayout.gt-xs="row"  fxLayout.xs="column" >
+                    <div fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%" >
+                      <h3 class="text-themecolor title">{{'pages.payments.membership.title' | translate}}</h3>
+                     </div>
+                    
+                    <div fxLayout.gt-xs="column" fxLayout.xs="row"  fxFlex.gt-xs="50%" fxFlex.xs="100%">
+     
+                      <mat-form-field class="buscador" [ngClass.gt-sm]="'buscador-small'" fxLayoutAlign.gt-xs="end" appearance="outline"> 
+      
+                        <mat-label>{{'pages.payments.membership.search' | translate}}</mat-label>
+                        <mat-icon matPrefix class="icon-search" >search</mat-icon>
+                        <input matInput (keyup)="applyFilter($event)" >
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <button mat-raised-button class="excel" (click)="generateExcelM()">{{'pages.payments.membership.excel' | translate}} <mat-icon>list</mat-icon></button>
+                  <button mat-raised-button class="pdf" (click)="generatePDFM()">{{'pages.payments.membership.pdf' | translate}} <mat-icon>picture_as_pdf</mat-icon></button>
+     
+                  <mat-table class="table-white" [dataSource]="dataSourceM" class="futxtrm-color-negro" >
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="cliente">
+                      <mat-header-cell *matHeaderCellDef  > {{'pages.payments.membership.client' | translate}} </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.usuario.nombre}} {{element.usuario.apellido}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="membresia">
+                      <mat-header-cell *matHeaderCellDef  > {{'pages.payments.membership.membership' | translate}} </mat-header-cell>
+                      <mat-cell *matCellDef="let element">{{element.membresia.name}}</mat-cell>
+                     </ng-container>
+                     
+                  
+                     
+                     <ng-container matColumnDef="referencia">
+                       <mat-header-cell *matHeaderCellDef  > {{'pages.payments.categories.payment.number' | translate}} </mat-header-cell>
+                       <mat-cell *matCellDef="let element"> {{element.referencia}} </mat-cell>
+                     </ng-container>
+             
+                    
+                    
+                    
+                    
+                  
+                  
+                    <ng-container matColumnDef="fecha">
+                      <mat-header-cell *matHeaderCellDef  > {{'pages.payments.membership.date' | translate}} </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.fecha | date:'short'}} </mat-cell>
+                    </ng-container>
+                  
+                  
+              
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="opciones">
+                      <mat-header-cell *matHeaderCellDef   [ngStyle]="{'place-content':'center'}"> {{'pages.payments.membership.options' | translate}} </mat-header-cell>
+                      <mat-cell *matCellDef="let element" [ngStyle]="{'place-content':'center'}" >
+                        <div fxLayout.gt-xs="row"  fxLayout.xs="column">
+                          <div  *ngIf="permisos.pagos_aceptar_rechazar"  fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%">
+                            <button mat-mini-fab class="futxtrm-color-dorado" [ngClass.gt-xs]="'margin-buttons-row'" [ngClass.xs]="'margin-buttons-col'" matTooltip="{{'pages.payments.membership.tooltip.check' | translate}}"  matTooltipPosition="above" (click)="consultar(element._id,'m')">
+                              <mat-icon aria-label="Example icon-button with a heart icon" >info</mat-icon>
+                            </button>                      
+                          </div>
+                          <div *ngIf="permisos.pagos_eliminar" fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%"  >                  
+                            <button  mat-mini-fab class="futxtrm-color-rojo" matTooltip="{{'pages.payments.membership.tooltip.delete' | translate}}"  [ngClass.gt-xs]="'margin-buttons-row'" [ngClass.xs]="'margin-buttons-col'" matTooltipPosition="above" (click)="eliminar(element._id,'m')">
+                              <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                       
+                      </mat-cell>
+                    
+                    </ng-container>
+                  
+                    <!-- Symbol Column -->
+                   
+                  
+                    <mat-header-row *matHeaderRowDef="displayedColumnsM"></mat-header-row>
+                    <mat-row *matRowDef="let row;  let even = even; columns: displayedColumnsM;"  [ngClass]="{gray: even}"></mat-row>
+                  </mat-table>
+                  <mat-paginator  class="futxtrm-color-negro color-blanco" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+   
+                </div>
+             </mat-card-content>
+         </mat-card>
+     </div>
+      
+  </div>
+  
+  
+</div>

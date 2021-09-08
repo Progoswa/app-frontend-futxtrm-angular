@@ -1,0 +1,110 @@
+.comments-content{
+    height: 80% !important;
+      overflow-y:scroll;
+  }
+  
+  .comments-card{
+      padding: 24px !important;
+      place-content: center;
+      height: 70vh;
+  }
+  ::-webkit-scrollbar {
+      width: 5px;
+      border-radius: 5px;
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: inherit;
+      border-radius: 10px;
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: rgba(136, 136, 136, 0.527);
+      border-radius: 10px;
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(85, 85, 85, 0.575);
+    }
+  
+  .text-muted {
+      color: #99abb4!important;
+  }
+  
+  .pull-right {
+      float: right;
+  }
+  
+  .label {
+      padding: 3px 10px;
+      line-height: 13px;
+      color: #fff;
+      font-weight: 400;
+      border-radius: 4px;
+      font-size: 75%;
+  }
+  
+  .label-info {
+      background-color: #1e88e5;
+  }
+  
+  .label-light-success {
+      background-color: #D0AE3D;
+      color: #ffffff;
+  }
+  
+  .m-b-5 {
+      margin-bottom: 5px;
+  }
+  
+  .m-0 {
+      margin: 0;
+  }
+  
+  .comment-text {
+      padding: 15px 15px 15px 20px;
+  }
+  
+  .comment-widgets .comment-row:hover {
+      border-color: #D0AE3D;
+  }
+  
+  .comment-widgets .comment-row {
+      border-left: 3px solid #0e0e0e;
+      padding: 15px;
+  }
+  
+  .comment-text:hover{
+      .icons{
+          visibility: visible;
+      }
+  }
+  
+  .icons{
+      visibility: hidden;
+  }
+  .icon-style{
+      margin-left: 15px;
+      vertical-align: middle;
+      color: #99abb4;
+      cursor: pointer;
+  
+  }
+  
+  .check:hover{
+      color: #03a9f4;
+  }
+  .delete:hover{
+      color: #f44336 ;
+  }
+
+  .add-button{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+  

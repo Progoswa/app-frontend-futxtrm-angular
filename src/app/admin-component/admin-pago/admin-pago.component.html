@@ -1,0 +1,55 @@
+<div *ngIf="pago" class="color-dorado">
+  <h1>Hola</h1>
+  <h3>
+    {{ "pages.payments.categories.payment.title" | translate
+    }}<span *ngIf="pago.status == 1">{{
+      "pages.payments.categories.payment.accepted" | translate
+    }}</span
+    ><span *ngIf="pago.status == 2">{{
+      "pages.payments.categories.payment.canceled" | translate
+    }}</span>
+  </h3>
+  <p>
+    {{ pago.usuario.nombre }} {{ pago.usuario.apellido }}
+    {{ msg(pago.status) }}
+    {{ "pages.payments.categories.payment.the" | translate }}
+    {{ pago.categoria.nombre }}
+  </p>
+  <p>
+    {{ "pages.payments.categories.payment.date" | translate }}
+    <span class="color-blanco">{{ pago.fecha | date: "short" }}</span>
+  </p>
+  <p>
+    {{ "pages.payments.categories.payment.amount" | translate }}
+    <span class="color-blanco">{{ pago.monto }}$</span>
+  </p>
+  <p>
+    {{ "pages.payments.categories.payment.method" | translate }}
+    <span class="color-blanco">{{ pago.metodo }}</span>
+  </p>
+  <p>
+    {{ "pages.payments.categories.payment.number" | translate }}
+    <span class="color-blanco">{{ pago.referencia }}</span>
+  </p>
+  <div *ngIf="pago.metodo == 'offline'">
+    <p>{{ "pages.payments.categories.payment.capture" | translate }}</p>
+    <img *ngIf="url" src="{{ url }}" alt="" class="captura" />
+  </div>
+  <div style="margin-top: 15px" *ngIf="opciones">
+    <button
+      mat-raised-button
+      class="futxtrm-color-gris"
+      (click)="rechazar(pago._id)"
+    >
+      {{ "pages.payments.categories.payment.refuse" | translate }}
+    </button>
+    <button
+      mat-raised-button
+      class="futxtrm-color-dorado"
+      style="margin-left: 15px"
+      (click)="aceptar(pago._id)"
+    >
+      {{ "pages.payments.categories.payment.accept" | translate }}
+    </button>
+  </div>
+</div>

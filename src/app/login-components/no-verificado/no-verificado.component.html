@@ -1,0 +1,28 @@
+<div class="login" fxLayout="row">
+
+  <img class="logo" alt="homepage" src="./assets/images/logo.png" width="180px">
+
+  <div fxFlex.lt-md="0%" fxFlex.gt-sm="60%">
+  </div>
+  <div fxFlex.lt-md="100%"  fxFlex.gt-sm="40%" fxLayout="row" class="login-content black-opacity color-blanco">
+    <mat-card fxFlex.lt-sm="100%" fxFlex.gt-sm="65%" fxFlex.md="90%"  fxFlexAlign="center" class="card-login black-opacity color-blanco">
+      <mat-card-content *ngIf="data" class="color-blanco">
+        <div class="text-center">
+          <span ><mat-icon aria-hidden="false" aria-label="Example home icon">mark_email_read</mat-icon></span>
+                <p style="font-weight: 500;">{{'not_verified.title' | translate}}</p>
+                <p class="f-p-text">{{'not_verified.initial_msg' | translate}} <strong>{{data.email}}</strong> {{'not_verified.final_msg' | translate}}</p>
+                <p class="f-p-text">{{'not_verified.no_received' | translate}} <span class="fake-a color-dorado" (click)="resend_email()">{{'not_verified.resend' | translate}}</span></p>
+        </div>
+    
+        <div class="text-center no-account" >
+
+          <a class="link color-dorado"  routerLink="/ingresa">{{'not_verified.back' | translate}}</a>
+        </div>
+     
+        
+      </mat-card-content>        
+  </mat-card>
+  </div>
+
+
+</div>

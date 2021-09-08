@@ -1,0 +1,54 @@
+<div *ngIf="plantilla">
+  <div class="header">
+    <img src="/assets/images/logo.png" alt="" width="375">
+  </div>
+  <div class="text-center"> <h2 class="color-dorado">{{'user.template.title' | translate}} {{plantilla.categoria.nombre}}</h2></div>
+
+  <div *ngFor="let seccion of plantilla.plantilla">
+
+    <div class="text-center futxtrm-color-dorado"> <h4 class="color-blanco">{{seccion.seccion.nombre}} ({{getTimeSeccion(seccion)}} min totales)</h4></div>
+    <div>
+      <div class="row color-blanco" style="padding: 5px;" >
+          <div class="col-sm-4">{{'user.template.name' | translate}}</div>
+          <div class="col-sm-2">{{'user.template.requirements' | translate}}</div>
+          <div class="col-sm-2">{{'user.template.repeat' | translate}}</div>
+          <div class="col-sm-2">{{'user.template.break' | translate}}</div>
+          <div class="col-sm-2">{{'user.template.example' | translate}}</div>
+      </div>
+      <div *ngFor="let ejercicio of seccion.ejercicios; let i = index">
+        <mat-divider class="divider"></mat-divider>
+        <div class="row color-blanco" style="padding: 5px;">
+            <div class="col-sm-4 ">{{i+1}}) {{ejercicio.entrenamiento.ejercicio}}. <br><br> {{ejercicio.entrenamiento.descripcion}}</div>
+            <div class="col-sm-2 ">{{ejercicio.entrenamiento.requerimientos}}</div>
+            <div class="col-sm-2 ">{{ejercicio.entrenamiento.repeticiones}}</div>
+            <div class="col-sm-2 ">{{ejercicio.entrenamiento.descanso}} {{'user.template.seconds' | translate}}</div>
+            <div class="col-sm-2 ">
+              <div *ngIf="ejercicio.entrenamiento.formato == 'mp4'" style="width: 100%; height: 100%;" >
+                <video width="100%" height="100%" controls>
+                  <source src="{{url}}/{{ejercicio.entrenamiento.video}}" type="video/mp4">
+                  <source src="{{url}}/{{ejercicio.entrenamiento.video}}" type="video/ogg">
+                  <source src="{{url}}/{{ejercicio.entrenamiento.video}}" type="video/webm">
+                Your browser does not support the video tag.
+                </video>
+             
+              </div>
+              <div  *ngIf="ejercicio.entrenamiento.formato == 'vimeo'" >
+                
+                <div  style="padding:70% 0 0 0;position:relative;"><iframe [src]="ejercicio.entrenamiento.id_vimeo | vimeo" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+                      </div>
+            </div>
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+  
+  <div class="text-center futxtrm-color-dorado"> <h4 class="color-blanco">{{'user.template.time' | translate}}: {{getTotalTime(plantilla)}} {{'user.template.min' | translate}}</h4></div>
+  
+  <div class="text-center m-t-2r">
+    <button mat-raised-button class="futxtrm-color-dorado" (click)="convertirPDF()">{{'user.template.button' | translate}}</button>
+  </div>
+
+
+</div>

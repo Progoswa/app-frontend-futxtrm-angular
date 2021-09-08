@@ -1,0 +1,84 @@
+<div >
+
+  <div fxLayout="row wrap"   fxLayoutAlign="center" [ngStyle]="{'margin':'auto'}">
+    <!-- column -->    
+     <div fxFlex="100">
+         <mat-card [ngStyle]="{'place-content': 'center'}" class="main-content futxtrm-color-negro color-blanco">
+           
+             <mat-card-content fxFlex="90" >
+               <div fxLayout.gt-xs="row"  fxLayout.xs="column" >
+                 <div fxLayout.gt-xs="column" fxLayout.xs="row"  fxFlex="100%" >
+             
+                   <h3 *ngIf="seccion" class="text-themecolor title" [ngStyle]="{'margin-left':'-24px'}"><mat-icon class="back" routerLink="/admin/configuracion/secciones/categoria" [queryParams]="{id: data.cat}">arrow_back</mat-icon>{{'pages.exercises.section.title' | translate}} {{seccion.nombre}} </h3>
+                  <p *ngIf="seccion">{{seccion.descripcion}}</p>
+                 </div>
+                
+               </div>
+               <mat-table class="table-white" [dataSource]="dataSource" class="futxtrm-color-negro" >
+                <!-- Position Column -->
+                <ng-container matColumnDef="ejercicio">
+                  <mat-header-cell *matHeaderCellDef  > {{'pages.exercises.section.name' | translate}} </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.entrenamiento.ejercicio}} </mat-cell>
+                </ng-container>
+      
+              
+            
+              
+            
+              
+              
+                <ng-container matColumnDef="fecha">
+                  <mat-header-cell *matHeaderCellDef  > {{'pages.exercises.section.date' | translate}} </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.entrenamiento.fecha | date:'short'}} </mat-cell>
+                </ng-container>
+              
+              
+                <!-- Name Column -->
+                <!-- <ng-container matColumnDef="status" >
+                  <mat-header-cell *matHeaderCellDef    [ngStyle]="{'place-content':'center'}"> Estado </mat-header-cell>
+                  <mat-cell *matCellDef="let element" [ngStyle]="{'place-content':'center'}">
+                    <mat-slide-toggle [checked]="element.status" (click)="cambiarStatus(element._id)"></mat-slide-toggle>
+                  </mat-cell>
+                </ng-container> -->
+               
+              
+                <!-- Weight Column -->
+                <ng-container matColumnDef="opciones">
+                  <mat-header-cell *matHeaderCellDef   [ngStyle]="{'place-content':'center'}"> {{'pages.exercises.section.options' | translate}} </mat-header-cell>
+                  <mat-cell *matCellDef="let element" [ngStyle]="{'place-content':'center'}" >
+                    <div  fxLayout.gt-xs="row"  fxLayout.xs="column">
+                  
+                      <div fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%">
+                        <button mat-mini-fab class="futxtrm-color-dorado" [ngClass.gt-xs]="'margin-buttons-row'" [ngClass.xs]="'margin-buttons-col'" matTooltip="{{'pages.exercises.section.see.msg' | translate}}"  matTooltipPosition="above" (click)="ver(element.entrenamiento)">
+                          <mat-icon aria-label="Example icon-button with a heart icon" >visibility</mat-icon>
+                        </button>                      
+                      </div>
+                      <div *ngIf="permisos.secciones_entrenamiento_agregar" fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%"  >                  
+                        <button mat-mini-fab class="futxtrm-color-rojo" matTooltip="{{'pages.exercises.section.delete.msg' | translate}}"  [ngClass.gt-xs]="'margin-buttons-row'" [ngClass.xs]="'margin-buttons-col'" matTooltipPosition="above" (click)="eliminar(element._id)">
+                          <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                   
+                  </mat-cell>
+                
+                </ng-container>
+              
+                <!-- Symbol Column -->
+               
+              
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row;  let even = even; columns: displayedColumns;"  [ngClass]="{gray: even}"></mat-row>
+              </mat-table>
+              <mat-paginator  class="futxtrm-color-negro color-blanco" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+              </mat-card-content >
+            </mat-card>
+     </div>
+      
+  </div>
+  
+  <button *ngIf="permisos.entrenamientos_cargar" mat-fab class="futxtrm-color-dorado add-button"  matTooltip="{{'pages.exercises.section.new.msg' | translate}}" (click)="nuevoArchivo()">
+    <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+   </button>
+ </div>
+ 

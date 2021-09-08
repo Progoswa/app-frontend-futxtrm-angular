@@ -1,0 +1,66 @@
+<div fxLayout="row wrap"   fxLayoutAlign="center" [ngStyle]="{'margin':'auto'}">
+  <!-- column -->    
+   <div fxFlex="100">
+       <mat-card [ngStyle]="{'place-content': 'center'}" class="futxtrm-color-negro color-blanco">
+
+       
+         
+           <mat-card-content fxFlex="90" >
+             
+            <div fxLayout.gt-xs="row"  fxLayout.xs="column" >
+              <div fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%" >
+                <h3 class="text-themecolor title">{{'pages.audits.title' | translate}}</h3>
+
+              </div>
+              <div fxLayout.gt-xs="column" fxLayout.xs="row"  fxFlex.gt-xs="50%" fxFlex.xs="100%">
+
+                <form [formGroup]="filterForm"> 
+                  <div>
+
+                    <mat-form-field class="buscador" [ngClass.gt-sm]="'buscador-small'" fxLayoutAlign.gt-xs="end" appearance="outline">
+    
+                      <mat-label>{{'pages.audits.search' | translate}}</mat-label>
+                      <mat-icon matPrefix class="icon-search" >search</mat-icon>
+                      <input matInput (keyup)="applyFilter($event)" >
+                    </mat-form-field>
+                  </div>
+           
+                 
+            </form>
+              </div>
+            </div>
+              
+                
+             
+            <button mat-raised-button class="excel" (click)="generateExcel()">{{'pages.audits.excel' | translate}} <mat-icon>list</mat-icon></button>
+            <button mat-raised-button class="pdf" (click)="generatePDF()">{{'pages.audits.pdf' | translate}} <mat-icon>picture_as_pdf</mat-icon></button>
+
+          
+            
+              <mat-table class="table-white" [dataSource]="dataSource" class="futxtrm-color-negro" >
+                <ng-container matColumnDef="Usuario">
+                  <mat-header-cell *matHeaderCellDef  > {{'pages.audits.user' | translate}} </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.usuario.username}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="nombre">
+                  <mat-header-cell *matHeaderCellDef  > {{'pages.audits.name' | translate}} </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.usuario.nombre}} {{element.usuario.apellido}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Accion">
+                  <mat-header-cell *matHeaderCellDef  > {{'pages.audits.action' | translate}} </mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.accion}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Fecha">
+                  <mat-header-cell *matHeaderCellDef  > {{'pages.audits.date' | translate}} </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.fecha | date:'short'}} </mat-cell>
+                </ng-container>
+                        
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row;  let even = even; columns: displayedColumns;"  [ngClass]="{gray: even}"></mat-row>
+              </mat-table>
+              <mat-paginator  class="futxtrm-color-negro color-blanco" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+           </mat-card-content>
+       </mat-card>
+   </div>
+    
+</div>

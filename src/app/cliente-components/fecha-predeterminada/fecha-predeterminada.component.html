@@ -1,0 +1,50 @@
+<h2 mat-dialog-title class="text-center margin-button-5 color-dorado">{{'user.home.choose.default.title' | translate}} {{data.nombre}}</h2>
+<div mat-dialog-content class="color-blanco margin-button-5 content">
+  <div class="row">
+    <div class="col-sm-12 text-center"><h6>{{'user.home.choose.default.subtitle' | translate}} </h6></div>
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-6 row " style="margin: 0;">
+      
+     
+          
+          <form [formGroup]="horarioForm">
+            <div class="col-sm-12 row" style="padding: 0 5px;">
+             <div class="col-sm-12 text-center"><span >{{'user.home.choose.default.hour' | translate}} </span></div>
+             <mat-form-field class="col-sm-7" appearance="outline">
+               <mat-label>{{'user.home.choose.default.hour_start' | translate}} </mat-label>
+               <input   (input)="hourChange()"   matInput formControlName="min" placeholder="8:00 AM" >
+               <!-- <ngx-material-timepicker #min  (timeSet)="hourChange($event)"></ngx-material-timepicker> -->
+              
+             </mat-form-field >
+             <div class="col-sm-5 amorpmdiv">
+              <button mat-raised-button class="amorpm" (click)="selectHour('am')" [ngClass]="{'select':hour == 'am'}">AM</button>
+              <button mat-raised-button class="amorpm" (click)="selectHour('pm')"  [ngClass]="{'select':hour == 'pm'}">PM</button>
+             </div>
+            
+            </div>
+            <div class="col-sm-12" style="padding: 0 5px;">
+             <mat-form-field appearance="outline">
+               <mat-label>{{'user.home.choose.default.hour_end' | translate}} </mat-label>
+               <input [ngxTimepicker]="max"  [disabled]="true"  readonly matInput formControlName="max"  >
+               <ngx-material-timepicker  #max></ngx-material-timepicker>
+             </mat-form-field>
+            </div>
+          </form>
+          </div>
+          <div class="col-sm-6" style="margin: 0; padding-top: 24px !important;">
+          
+            <div  *ngFor="let dia of data.dias"><strong>({{dia.tipo | ejercicio}}) {{format(dia.fecha)}}</strong></div>
+          </div>
+      </div>
+     
+       
+      </div>
+    </div>
+  
+  
+  </div>
+<div mat-dialog-actions class="margin-actions float-right">
+  <button mat-button (click)="onNoClick()" tabindex="-1"  class="margin-button-5 futxtrm-color-gris" >{{'user.home.choose.default.cancel' | translate}}  <mat-icon>cancel</mat-icon></button>
+  <button mat-button (click)="aceptar()" tabindex="-1"  class="margin-button-5 futxtrm-color-dorado" [disabled]="horarioForm.invalid">{{'user.home.choose.default.continue' | translate}}  <mat-icon>arrow_forward</mat-icon></button>
+</div>

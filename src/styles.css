@@ -1,0 +1,258 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+
+.no-shadow{
+    box-shadow: none !important;
+}
+
+
+.futxtrm-color{
+    background-color: #003897 !important;
+}
+.futxtrm-color-verde{
+    background-color: #00e676 !important;
+}
+.futxtrm-color-negro{
+    background-color: #0e0e0e !important;
+}
+.futxtrm-color-blanco{
+    background-color: #ffffff !important;
+}
+
+.black-opacity{
+    background:#000000cc !important;
+}
+.futxtrm-color-dorado{
+    background-color: #D0AE3D !important;
+}
+.futxtrm-color-naranja{
+    background-color: #ff6d00 !important;
+}
+.futxtrm-color-rojo{
+    background-color: #d94343 !important;
+}
+.futxtrm-color-gris{
+    background-color: #615c5c !important;
+    color: #ffffff !important;
+}
+.futxtrm-color-rojo-gradient{
+    background: linear-gradient(90deg, rgba(158,47,47,1) 0%, rgba(217,67,67,1) 73%) !important;
+}
+.futxtrm-color-azul{
+    background-color: #003897!important;
+}
+
+.color-blanco{
+    color: white !important;
+}
+.color-negro{
+    color: black !important;
+}
+
+.color-dorado{
+    color:#D0AE3D !important;
+}
+.profile-header{
+    min-width: 270px;
+    height: 100px;
+    padding: 10px 15px;
+}
+
+.mat-select-value-text {
+    color: white !important;
+}
+
+mat-error{
+    color:white !important;
+}
+mat-hint{
+    color:white !important; 
+}
+.mat-select-panel {
+    background:#0e0e0e !important;
+  
+}
+.mat-option-text{
+    color:#D0AE3D !important;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+    background: #D0AE3D !important;
+}
+
+.profile-img{
+    align-self: center;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.gray { background-color: #333333 }
+
+.profile-name{
+    margin-top: 2px;
+    margin-bottom: 0px;
+
+}
+
+.width-70{
+    width: 70% !important;
+}
+
+.profile-email{
+
+    margin-top: 0px;
+    margin-bottom: 2px;
+    font-size: 14px;
+    color: #99abb4 !important;
+    width: 100%;
+    overflow: hidden;
+}
+
+.timepicker-overlay {
+    z-index: 10000000 !important;
+}
+
+.timepicker-backdrop-overlay {
+    z-index: 10000000 !important;
+}
+
+.text-right{
+    text-align: right;
+}
+
+.float-right{
+    float: right !important;
+}
+
+.justify-center{
+    justify-content: center;
+}
+
+.logo-center  {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto; }
+
+.margin-auto{
+    margin: auto !important;
+}
+
+.mini-sidebar {
+    width: 60px;
+    text-align: center; }
+
+
+.sidebar-horizontal{
+  
+    background-color: #0e0e0e;
+}
+
+.max-w{
+    max-width: 1280px !important;
+  }
+
+  .page-wrapper .page-content{
+    background: #0e0e0e !important;
+    max-width: 1280px !important;
+    margin: auto !important;
+  }
+
+
+  .bg-success {
+    background-color: #26c6da!important;
+}
+
+.text-white{
+    color: white;
+}
+
+.p-t-0{
+    padding-top: 0px !important;
+}
+.p-b-0{
+    padding-bottom: 0px !important;
+}
+
+.m-t-0{
+    margin-top: 0px !important;
+}
+.m-0{
+    margin: 0 !important;
+}
+.m-b-5{
+    margin-bottom: 5px !important;
+}
+.m-t-2r{
+    margin-top: 2rem !important;
+}
+
+.m-t-25{
+    margin-top: 25px !important;
+}
+
+.p-0{
+    padding: 0 !important;
+}
+
+.width-100{
+    width: 100% !important;
+}
+
+.margin-0{
+    margin: 0 !important;
+}
+
+
+button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+
+  .logo{
+    position: fixed;
+    top: 10px;
+    left: 25px;
+}
+.timepicker__header{
+    background-color: #D0AE3D !important;
+}
+
+.timepicker__body {
+    background-color: #0e0e0e !important;
+    --clock-hand-color: #D0AE3D !important;
+}
+
+.timepicker__actions {
+    background-color: #0e0e0e !important;
+}
+
+.clock-face {
+    background-color: #000000 !important;
+    color: white;
+    --clock-face-time-inactive-color: #d0ae3d !important;
+    --clock-face-inner-time-inactive-color: #d0ae3d !important;
+    --clock-face-time-disabled-color: #ffffff !important;
+}
+
+.timepicker-button {
+    color: #d0ae3d !important;
+}
+
+.select-lang{
+    position: absolute !important;
+    top: 10px;
+    right: 10px;
+    background:#0e0e0e;
+    color: #d0ae3d;
+}
+
+.lang{
+    background: #0e0e0e !important;
+    color: #d0ae3d !important;
+}
+
+
+

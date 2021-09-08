@@ -1,0 +1,113 @@
+<div >
+
+  <div fxLayout="row wrap"   fxLayoutAlign="center" [ngStyle]="{'margin':'auto'}">
+    <!-- column -->    
+     <div fxFlex="100">
+         <mat-card [ngStyle]="{'place-content': 'center'}" class="futxtrm-color-negro">
+           
+             <mat-card-content fxFlex="90" >
+               <div fxLayout.gt-xs="row"  fxLayout.xs="column" >
+                 <div fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%" >
+             
+                   <h3  *ngIf="categoria" class="text-themecolor title" [ngStyle]="{'margin-left':'-24px'}"><mat-icon class="back" routerLink="/admin/configuracion/categorias">arrow_back</mat-icon>{{'pages.sections.title' | translate}} {{categoria.nombre}}</h3>
+                    <p *ngIf="categoria" class="color-blanco"> {{categoria.descripcion}}</p>
+                 </div>
+                 <div fxLayout.gt-xs="column" fxLayout.xs="row"  fxFlex.gt-xs="50%" fxFlex.xs="100%">
+  
+                   <mat-form-field class="buscador color-blanco" [ngClass.gt-sm]="'buscador-small'" fxLayoutAlign.gt-xs="end" appearance="outline">
+   
+                     <mat-label>{{'pages.sections.search' | translate}}</mat-label>
+                     <mat-icon matPrefix class="icon-search color-blanco" >search</mat-icon>
+                     <input matInput (keyup)="applyFilter($event)" >
+                   </mat-form-field>
+                 </div>
+               </div>
+  <!--             
+               nombre
+               apellido
+               role
+               creditos
+               fecha
+               status
+               opciones -->
+               <mat-table class="table-white" [dataSource]="dataSource" class="futxtrm-color-negro" >
+                 <!-- Position Column -->
+                 <ng-container matColumnDef="nombre">
+                   <mat-header-cell *matHeaderCellDef  > {{'pages.sections.name' | translate}} </mat-header-cell>
+                   <mat-cell *matCellDef="let element"> {{element.nombre}} </mat-cell>
+                 </ng-container>
+                 <ng-container matColumnDef="descripcion">
+                   <mat-header-cell *matHeaderCellDef  > {{'pages.sections.description' | translate}} </mat-header-cell>
+                   <mat-cell *matCellDef="let element">{{element.descripcion}}</mat-cell>
+                 </ng-container>
+               
+             
+      
+               
+             
+               
+               
+                 <ng-container matColumnDef="fecha">
+                   <mat-header-cell *matHeaderCellDef  > {{'pages.sections.date' | translate}} </mat-header-cell>
+                   <mat-cell *matCellDef="let element"> {{element.fecha | date:'short'}} </mat-cell>
+                 </ng-container>
+               
+               
+                 <!-- Name Column -->
+                 <!-- <ng-container matColumnDef="status" >
+                   <mat-header-cell *matHeaderCellDef    [ngStyle]="{'place-content':'center'}"> Estado </mat-header-cell>
+                   <mat-cell *matCellDef="let element" [ngStyle]="{'place-content':'center'}">
+                     <mat-slide-toggle [checked]="element.status" (click)="cambiarStatus(element._id)"></mat-slide-toggle>
+                   </mat-cell>
+                 </ng-container> -->
+                
+               
+                 <!-- Weight Column -->
+                 <ng-container matColumnDef="opciones">
+                   <mat-header-cell *matHeaderCellDef   [ngStyle]="{'place-content':'center'}"> {{'pages.sections.options' | translate}} </mat-header-cell>
+                   <mat-cell *matCellDef="let element" [ngStyle]="{'place-content':'center','overflow':'visible'}" >
+                     <div  fxLayout.gt-xs="row"  fxLayout.xs="column">
+                   
+                       <div  fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%">
+                         <button mat-mini-fab class="futxtrm-color-dorado" [ngClass.gt-xs]="'margin-buttons-row'" [ngClass.xs]="'margin-buttons-col'" matTooltip="{{'pages.sections.exercies' | translate}}"  matTooltipPosition="above" (click)="entrenamientos(element._id)">
+                           <mat-icon aria-label="Example icon-button with a heart icon" >directions_run</mat-icon>
+                         </button>                      
+                       </div>
+                       <div  fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%">
+                         <button mat-mini-fab class="futxtrm-color-dorado" [ngClass.gt-xs]="'margin-buttons-row'" [ngClass.xs]="'margin-buttons-col'" matTooltip="{{'pages.sections.see.msg' | translate}}"  matTooltipPosition="above" (click)="ver(element)">
+                           <mat-icon aria-label="Example icon-button with a heart icon" >remove_red_eye</mat-icon>
+                         </button>                      
+                       </div>
+                       <div *ngIf="permisos.secciones_editar" fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%">
+                         <button mat-mini-fab class="futxtrm-color-dorado" [ngClass.gt-xs]="'margin-buttons-row'" [ngClass.xs]="'margin-buttons-col'" matTooltip="{{'pages.sections.edit.msg' | translate}}"  matTooltipPosition="above" (click)="editar(element)">
+                           <mat-icon aria-label="Example icon-button with a heart icon" >edit</mat-icon>
+                         </button>                      
+                       </div>
+                       <div *ngIf="permisos.secciones_eliminar" fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%"  >                  
+                         <button mat-mini-fab class="futxtrm-color-rojo" matTooltip="{{'pages.sections.delete.msg' | translate}}"  [ngClass.gt-xs]="'margin-buttons-row'" [ngClass.xs]="'margin-buttons-col'" matTooltipPosition="above" (click)="eliminar(element._id)">
+                           <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+                         </button>
+                       </div>
+                     </div>
+                    
+                   </mat-cell>
+                 
+                 </ng-container>
+               
+                 <!-- Symbol Column -->
+                
+               
+                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                 <mat-row *matRowDef="let row;  let even = even; columns: displayedColumns;"  [ngClass]="{gray: even}"></mat-row>
+               </mat-table>
+               <mat-paginator  class="futxtrm-color-negro color-blanco" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+             </mat-card-content>
+         </mat-card>
+     </div>
+      
+  </div>
+  
+  <button *ngIf="permisos.secciones_crear" mat-fab class="futxtrm-color-dorado add-button"  matTooltip="{{'pages.sections.new.msg' | translate}}" (click)="nueva()" >
+   <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+  </button>
+</div>

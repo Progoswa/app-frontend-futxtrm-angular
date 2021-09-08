@@ -1,0 +1,120 @@
+.login{
+
+    background-image: url('../../../assets/images/background/login-bg.jpg') ;
+    height: 100vh;
+    display: -webkit-box;
+    display: flex;
+    background-size: cover;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.login-box{
+    max-width: 400px;
+    min-width: 400px;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+
+.top-card{
+    margin-top: 0px ;
+    line-height: 22px;
+    font-size: 18px;
+    font-family: Poppins,sans-serif;
+    font-weight: 400;
+    margin-bottom: 23px;
+}
+
+.login-button{
+    width: 100%;
+    height: 45px;
+    margin-top: 15px;
+}
+
+.login-content{
+    background-color: white;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.card-login{
+    margin: auto
+}
+
+.text-info {
+    color: #1e88e5!important;
+}
+
+.no-account{
+    margin-top: 15px;
+}
+
+.facebook-button{
+    background-color: #3f5c9a;
+    width: 50%;
+    margin-top: 5px;
+    color: white;
+}
+.google-button{
+    background-color: #D73D32;
+    width: 50%;
+    margin-top: 5px;
+    color: white;
+}
+
+.f-p-text{
+    text-align: center;
+    font-size: 14px;
+    color: #ffffffab;
+  }
+
+  .fake-a{
+    color: #455a64;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  .fake-a:hover {
+  color: #1e88e5
+  }
+  
+
+
+.hr-text {
+    background-color: inherit;
+    line-height: 1em;
+    position: relative;
+    outline: 0;
+    border: 0;
+    color: black;
+    text-align: center;
+    height: 1.5em;
+    opacity: .5;
+    &:before {
+      content: '';
+      // use the linear-gradient for the fading effect
+      // use a solid background color for a solid bar
+      background: linear-gradient(to right, transparent, #818078, transparent);
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 1px;
+    }
+    &:after {
+      content: attr(data-content);
+      position: relative;
+      display: inline-block;
+      color: black;
+  
+      padding: 0 .5em;
+      line-height: 1.5em;
+      // this is really the only tricky part, you need to specify the background color of the container element...
+      color: #818078;
+      background-color: #fcfcfa;
+    }
+  }

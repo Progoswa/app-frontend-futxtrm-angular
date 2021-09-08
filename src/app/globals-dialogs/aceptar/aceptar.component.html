@@ -1,0 +1,88 @@
+<h2 mat-dialog-title class="text-center margin-button-5 color-dorado">
+  {{ data.msg }}
+</h2>
+<div mat-dialog-content class="text-center margin-button-5 color-blanco">
+  {{ data.content }}
+</div>
+<div mat-dialog-actions class="float-right">
+  <div class="row">
+    <div class="col-md-12 row">
+      <form [formGroup]="cardForm">
+        <div class="row">
+          <div class="col-sm-12">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>{{
+                "user.categorie_payment.card.number.label" | translate
+              }}</mat-label>
+              <input
+                matInput
+                (input)="formatNumber()"
+                formControlName="number"
+                class="color-blanco"
+              />
+              <mat-error *ngIf="cardForm.controls.number.invalid">{{
+                "user.categorie_payment.card.number.invalid" | translate
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field appearance="outline">
+              <mat-label>{{
+                "user.categorie_payment.card.date.label" | translate
+              }}</mat-label>
+              <input
+                matInput
+                formControlName="exp"
+                (input)="formatFecha()"
+                class="color-blanco"
+                placeholder="{{
+                  'user.categorie_payment.card.date.placeholder' | translate
+                }}"
+              />
+
+              <mat-error *ngIf="cardForm.controls.exp.invalid">{{
+                "user.categorie_payment.card.date.invalid" | translate
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>{{
+                "user.categorie_payment.card.cvc.label" | translate
+              }}</mat-label>
+              <input
+                matInput
+                class="color-blanco"
+                (input)="formatCvc()"
+                formControlName="cvc"
+              />
+              <mat-error *ngIf="cardForm.controls.cvc.invalid">{{
+                "user.categorie_payment.card.cvc.invalid" | translate
+              }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-sm-12 text-center">
+          <button
+            mat-button
+            (click)="onNoClick()"
+            tabindex="-1"
+            class="futxtrm-color-gris"
+          >
+            {{ "modals.agree.cancel" | translate }} <mat-icon>cancel</mat-icon>
+          </button>
+          <button
+            mat-button
+            (click)="aceptar()"
+            tabindex="-1"
+            class="futxtrm-color-dorado"
+            [disabled]="cardForm.invalid"
+          >
+            {{ "modals.agree.agree" | translate }} <mat-icon>check</mat-icon>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

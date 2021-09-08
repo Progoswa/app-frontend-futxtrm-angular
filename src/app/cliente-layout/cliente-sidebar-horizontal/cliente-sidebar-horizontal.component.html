@@ -1,0 +1,35 @@
+
+
+<div  fxLayout="row" fxFlex="100" class="margin-auto max-w"> 
+
+    <mat-nav-list appAccordion class="list-horizontal ">
+        <mat-list-item appAccordionLink *ngFor="let menuitem of Items" routerLinkActive="selected" group="{{menuitem.state}}">
+            <a class="items" appAccordionToggle [routerLink]="['/cliente', menuitem.state]" *ngIf="menuitem.type === 'link'">
+                <mat-icon fxShow.lt-md="false" class="material-icons-round" >{{ menuitem.icon }}</mat-icon> 
+                <span>{{ menuitem.name }}</span> 
+                <span fxFlex></span> 
+                <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span> 
+            </a>      
+            <a    class="items" *ngIf="menuitem.type === 'group'"  #clickHoverMenuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu" >
+                <mat-icon fxShow.lt-md="false">{{ menuitem.icon }}</mat-icon> 
+                <span>{{ menuitem.name }}</span> 
+                <span fxflex="" style="flex: 1 1 0%; box-sizing: border-box;"></span>
+            
+                <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span> 
+            </a>     
+
+            <mat-menu #menu="matMenu" class="mymegamenu" >
+               
+                <a appAccordionToggle mat-menu-item  *ngFor="let item of menuitem.group" [routerLink]="item.state"  routerLinkActive="selected" class="mat-list-item-content">
+                     {{item.name}}
+                     </a>
+              
+            </mat-menu>
+          
+            
+    
+        </mat-list-item>
+    
+    </mat-nav-list>
+
+</div>

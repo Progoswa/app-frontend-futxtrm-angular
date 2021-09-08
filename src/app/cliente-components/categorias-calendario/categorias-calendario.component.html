@@ -1,0 +1,20 @@
+<h2 mat-dialog-title class="text-center margin-button-5 color-dorado">{{'user.calendar.categorie.title' | translate}}</h2>
+<div mat-dialog-content class="color-blanco margin-button-5 content">
+  <form [formGroup]="categoriaForm">
+    <mat-form-field appearance="outline">
+      <mat-label>{{'user.calendar.categorie.select' | translate}} </mat-label>
+      <mat-select formControlName="categoria" class="color-blanco" (selectionChange)="getCategoria($event.value)">
+        <mat-option *ngFor="let categoria of categorias" [value]="categoria.categoria.categoria._id">
+          {{categoria.categoria.categoria.nombre}}
+        </mat-option>
+       
+      </mat-select>
+    </mat-form-field>
+
+  
+  </form>
+  </div>
+<div mat-dialog-actions class="margin-actions">
+  <button mat-button (click)="onNoClick()" tabindex="-1"  class="margin-auto margin-button-5 futxtrm-color-gris">{{'user.calendar.categorie.cancel' | translate}}</button>
+  <button mat-button (click)="aceptar()" tabindex="-1" [disabled]="categoriaForm.invalid" class="margin-auto margin-button-5 futxtrm-color-dorado" >{{'user.calendar.categorie.next' | translate}}</button>
+</div>

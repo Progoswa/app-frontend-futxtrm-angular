@@ -1,0 +1,25 @@
+<div class="text-center">
+  <h1 class="color-dorado">{{membresia?.name}}</h1>
+  <h4 class="color-dorado">{{membresia?.description}}</h4>
+</div>
+
+<div class="row">
+  
+  <div *ngFor="let categoria of membresia?.categorias" class="col-md-4 col-sm-6 col-xs-12" style="padding: 20px;" fxFlex="row">
+    <div>
+
+      <mat-card class="categoria-card" [ngStyle]="{'background-image': getImg(categoria.imagen)}"  >
+
+      </mat-card>
+    </div>
+    <div class="title">
+      <span>{{categoria.nombre}}</span> <br> 
+    </div> 
+  </div>
+ </div>
+
+ <div class="text-center">
+   <button *ngIf="owner == null" mat-raised-button class="futxtrm-color-dorado" (click)="comprar()">{{'user.memberships.membership.button' | translate}}</button>
+   <h5 *ngIf="owner != null" mat-raised-button class="color-dorado" >{{'user.memberships.membership.own' | translate}}{{owner?.fecha_exp | date:'mediumDate'}}</h5>
+   <a *ngIf="owner != null"  class="color-dorado" routerLink="/cliente/membresias" >{{'user.memberships.membership.back' | translate}}</a>
+ </div>

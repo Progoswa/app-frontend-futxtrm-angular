@@ -1,0 +1,120 @@
+<div fxLayout="row wrap"  fxLayoutAlign="center" [ngStyle]="{'margin':'auto'}">
+  <!-- column -->    
+   <div fxFlex="100">
+       <mat-card [ngStyle]="{'place-content': 'center'}" class="futxtrm-color-negro">
+         
+           <mat-card-content fxFlex="90" >
+             <div fxLayout.gt-xs="row"  fxLayout.xs="column" >
+               <div fxLayout.gt-xs="column" fxLayout.xs="row" fxFlex.gt-xs="50%" fxFlex.xs="100%" >
+                <h3  class="text-themecolor title" [ngStyle]="{'margin-left':'-24px'}"><mat-icon class="back" routerLink="/admin/usuarios/usuarios">arrow_back</mat-icon>{{'pages.users.new.title' | translate}}</h3>
+
+               </div>
+              
+             </div>
+             <div class="form-cliente">
+              <form [formGroup]="clienteForm" fxLayout="column" class="color-blanco">
+                <div fxLayout.gt-sm="row" fxLayout.lt-sm="column" >
+                  
+                  <mat-form-field fxFlex.gt-sm="33.3%" fxFlex.lt-sm="100%" class="input" appearance="outline">
+                    <mat-label>{{'pages.users.new.name.label' | translate}}</mat-label>
+                    <input matInput  formControlName="nombre">
+                    <mat-error *ngIf="clienteForm.controls.nombre.errors?.required">{{'pages.users.new.name.required' | translate}}</mat-error>
+                    <mat-error *ngIf="clienteForm.controls.nombre.errors?.pattern">{{'pages.users.new.name.pattern' | translate}}</mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field fxFlex.gt-sm="33.3%" fxFlex.lt-sm="100%" class="input" appearance="outline">
+                    <mat-label>{{'pages.users.new.last_name.label' | translate}}</mat-label>
+                    <input matInput formControlName="apellido">
+                    <mat-error *ngIf="clienteForm.controls.apellido.errors?.required">{{'pages.users.new.last_name.required' | translate}}</mat-error>
+                    <mat-error *ngIf="clienteForm.controls.apellido.errors?.pattern">{{'pages.users.new.last_name.pattern' | translate}}</mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field fxFlex.gt-sm="33.3%" fxFlex.lt-sm="100%" class="input" appearance="outline">
+                    <mat-label>{{'pages.users.new.phone.label' | translate}}</mat-label>
+                    <ngx-mat-intl-tel-input
+                    [preferredCountries]="['mx', 'us']"
+                    [enablePlaceholder]="true"
+                    [enableSearch]="true"
+                    name="telefono"
+                    formControlName="telefono" #telefono></ngx-mat-intl-tel-input> 
+                    <mat-hint>Ejem. {{telefono.selectedCountry.placeHolder}}</mat-hint>
+                    <mat-error *ngIf="clienteForm.controls.telefono?.errors?.required">{{'pages.users.new.phone.required' | translate}}</mat-error>
+                    <mat-error *ngIf="clienteForm.controls.telefono?.errors?.validatePhoneNumber">{{'pages.users.new.phone.pattern' | translate}}</mat-error>
+                        </mat-form-field>
+                </div>
+      
+                <div fxLayout.gt-sm="row" fxLayout.lt-sm="column" >
+                  <mat-form-field fxFlex.gt-sm="33.3%" fxFlex.lt-sm="100%" class="input" appearance="outline">
+                    <mat-label>{{'pages.users.new.username.label' | translate}}</mat-label>
+                    <input matInput  formControlName="username">
+                    <mat-error *ngIf="clienteForm.controls.username.errors?.required">{{'pages.users.new.username.required' | translate}}</mat-error>
+                   
+                  </mat-form-field>
+                  <mat-form-field fxFlex.gt-sm="66.6%" fxFlex.lt-sm="100%" class="input" appearance="outline">
+                    <mat-label>{{'pages.users.new.email.label' | translate}}</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-error *ngIf="clienteForm.controls.email.errors?.required">{{'pages.users.new.email.required' | translate}}</mat-error>
+                    <mat-error *ngIf="clienteForm.controls.email.errors?.pattern">{{'pages.users.new.email.pattern' | translate}}</mat-error>
+                  </mat-form-field>
+                </div>
+               
+             
+                <div fxLayout.gt-sm="row" fxLayout.lt-sm="column" fxLayoutGap="5px">
+            
+                  <mat-form-field fxFlex.gt-sm="33.3%" fxFlex.lt-sm="100%" class="input" appearance ="outline">
+                    <mat-label>{{'pages.users.new.country' | translate}}</mat-label>
+                    <mat-select formControlName="pais" class="color-blanco" (selectionChange)="getEstados($event.value)">
+                      <mat-option *ngFor="let pais of paises" [value]="pais">
+                        {{pais.name}}
+                      </mat-option>
+                   
+                    </mat-select>            
+                  </mat-form-field>
+                  <mat-form-field fxFlex.gt-sm="33.3%" fxFlex.lt-sm="100%" class="input" appearance ="outline">
+                    <mat-label>{{'pages.users.new.state' | translate}}</mat-label>
+                    <mat-select formControlName="estado" class="color-blanco">
+                      <mat-option *ngFor="let estado of estados" [value]="estado.name" (onSelectionChange)="getCitys(estado)">
+                        {{estado.name}}
+                      </mat-option>
+                   
+                    </mat-select>              
+                  </mat-form-field>
+                  <mat-form-field fxFlex.gt-sm="33.3%" fxFlex.lt-sm="100%" class="input" appearance ="outline">
+                    <mat-label>{{'pages.users.new.city' | translate}}</mat-label>
+                    <input matInput formControlName="ciudad" >
+
+                    <mat-error *ngIf="clienteForm.controls.ciudad.errors?.required">{{'sign_up.city.invalid.required' | translate}}</mat-error>
+            
+                  </mat-form-field>
+               
+                </div>
+                <div  fxLayout.gt-sm="row" fxLayout.lt-sm="column">
+                  <mat-form-field fxFlex="50%" class="input" appearance="outline" >
+                    <mat-label>{{'pages.users.new.address.label' | translate}}</mat-label>
+                    <input matInput formControlName="direccion">
+                    <mat-error *ngIf="clienteForm.controls.direccion.errors?.required">{{'pages.users.new.address.required' | translate}}</mat-error>
+                  </mat-form-field>
+               
+                  <mat-form-field fxFlex="50%" class="input" appearance="outline" >
+                    <mat-label>{{'pages.users.new.role.label' | translate}}</mat-label>
+                    <mat-select formControlName="adminRole" class="color-blanco" >
+                      <mat-option  *ngFor="let rol of roles" [value]="rol._id">
+                        {{rol.nombre}}
+                      </mat-option>
+                   
+                    </mat-select>
+                    <mat-error *ngIf="clienteForm.controls.adminRole.errors?.required">{{'pages.users.new.role.required' | translate}}</mat-error>
+                  </mat-form-field>
+                </div>
+             
+             
+                <button   mat-raised-button color="primary"  class="registro-button futxtrm-color-dorado mt-4" [disabled]="clienteForm.invalid"  (click)="register()">{{'pages.users.new.button' | translate}}</button>
+              </form>
+        
+            </div>
+           </mat-card-content>
+       </mat-card>
+   </div>
+    
+</div>
+

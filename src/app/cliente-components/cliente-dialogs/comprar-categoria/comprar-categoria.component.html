@@ -1,0 +1,14 @@
+<h2 mat-dialog-title class="text-center margin-button-5 color-dorado">{{'user.home.buy.title' | translate}} {{data.nombre}}</h2>
+<div mat-dialog-content class="color-blanco margin-button-5 content">
+  <p>
+    {{'user.home.buy.description' | translate}}: {{data.descripcion}} <br>
+  
+    {{'user.home.buy.frequency' | translate}}: {{data.frecuencia}} <br>
+    {{'user.home.buy.time' | translate}}: {{fotmatTime(data.tiempo)}} <br>
+  </p>
+
+  </div>
+<div mat-dialog-actions class="margin-actions">
+  <button mat-button (click)="onNoClick()" tabindex="-1"  class="margin-auto margin-button-5 futxtrm-color-gris">{{'user.home.buy.cancel' | translate}}</button>
+  <button mat-button (click)="aceptar()" tabindex="-1"  class="margin-auto margin-button-5 futxtrm-color-dorado" >{{'user.home.buy.buy' | translate}}</button>
+</div>

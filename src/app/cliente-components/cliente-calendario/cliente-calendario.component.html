@@ -1,0 +1,100 @@
+<div fxLayout="row wrap"   fxLayoutAlign="center" [ngStyle]="{'margin':'auto'}">
+  <!-- column -->    
+   <div fxFlex="100">
+       <mat-card [ngStyle]="{'place-content': 'center'}" class="futxtrm-color-negro">
+         
+           <mat-card-content fxFlex="90" >
+             <div class="row" >
+
+               <div class="col-md-6 col-sm-12 row" >
+                 <div class="col-md-2 ">
+                  <button mat-raised-button class="futxtrm-color-dorado color-blanco" (click)="add()" style="margin-right:5px"><mat-icon>add</mat-icon></button>
+
+                 </div>
+                 <div class="col-md-10 ">
+                  <h1 class="text-themecolor title">{{monthFormat(currentMonth)}} {{yearFormat(currentDay)}}</h1>
+
+                 </div>
+
+               </div>
+               <div class="col-md-6 col-sm-12" style="text-align: right;">
+                 <button mat-raised-button class="futxtrm-color-dorado color-blanco" (click)="changeWeek(-1)" style="margin-right:5px"><</button>
+                 <button mat-raised-button class="futxtrm-color-dorado color-blanco" (click)="changeWeek(0)">{{'today' | translate}}</button>
+                 <button mat-raised-button class="futxtrm-color-dorado color-blanco" (click)="changeWeek(1)" style="margin-left:5px">></button>
+               </div>
+             </div>
+
+             <mat-table class="table-white" [dataSource]="dataSource" class="futxtrm-color-negro" >
+               <!-- Position Column -->
+               <ng-container matColumnDef="hora">
+                 <mat-header-cell *matHeaderCellDef >  </mat-header-cell>
+                 <mat-cell *matCellDef="let element"> {{(element.hora)/100}}:00 </mat-cell>
+               </ng-container>
+               <ng-container matColumnDef="domingo">
+                 <mat-header-cell *matHeaderCellDef ><span>{{'days_short.sun' | translate}} <span [ngClass]="(isToday())?'today':''"> {{getDay()}}</span></span></mat-header-cell>
+                 <mat-cell *matCellDef="let element" [ngClass]="(getByDate(0,element.hora) != null)?'plantilla':''"> <div *ngIf="getByDate(0,element.hora) != null;let plantilla" style="text-align: center;    line-height: 15px;" (click)="verPlantilla(getByDate(0,element.hora))">
+                  <span> {{getByDate(0,element.hora).categoria.nombre}} {{getByDate(0,element.hora).condicional | ejercicio}}</span>
+         
+                </div> </mat-cell>               </ng-container>
+               
+               <ng-container matColumnDef="lunes">
+                 <mat-header-cell *matHeaderCellDef ><span>{{'days_short.mon' | translate}} <span [ngClass]="(isToday(1))?'today':''"> {{getDay(1)}}</span></span></mat-header-cell>
+                 <mat-cell *matCellDef="let element" [ngClass]="(getByDate(1,element.hora) != null)?'plantilla':''"> <div *ngIf="getByDate(1,element.hora) != null;let plantilla" style="text-align: center;    line-height: 15px;" (click)="verPlantilla(getByDate(1,element.hora))">
+                   <span> {{getByDate(1,element.hora).categoria.nombre}} {{getByDate(1,element.hora).condicional | ejercicio}}</span>
+          
+                 </div> </mat-cell>
+               </ng-container>
+               
+               <ng-container matColumnDef="martes">
+                 <mat-header-cell *matHeaderCellDef ><span>{{'days_short.tue' | translate}} <span [ngClass]="(isToday(2))?'today':''"> {{getDay(2)}}</span></span></mat-header-cell>
+                 <mat-cell *matCellDef="let element" [ngClass]="(getByDate(2,element.hora) != null)?'plantilla':''"> <div *ngIf="getByDate(2,element.hora) != null;let plantilla" style="text-align: center;    line-height: 15px;" (click)="verPlantilla(getByDate(2,element.hora))">
+                  <span> {{getByDate(2,element.hora).categoria.nombre}} {{getByDate(2,element.hora).condicional | ejercicio}}</span>
+         
+                </div> </mat-cell>
+               </ng-container>
+               
+               <ng-container matColumnDef="miercoles">
+                 <mat-header-cell *matHeaderCellDef ><span>{{'days_short.wed' | translate}} <span [ngClass]="(isToday(3))?'today':''"> {{getDay(3)}}</span></span></mat-header-cell>
+                 <mat-cell *matCellDef="let element" [ngClass]="(getByDate(3,element.hora) != null)?'plantilla':''"> <div *ngIf="getByDate(3,element.hora) != null;let plantilla" style="text-align: center;    line-height: 15px;" (click)="verPlantilla(getByDate(3,element.hora))">
+                  <span> {{getByDate(3,element.hora).categoria.nombre}} {{getByDate(3,element.hora).condicional | ejercicio}}</span>
+         
+                </div> </mat-cell>
+               </ng-container>
+               
+               <ng-container matColumnDef="jueves">
+                 <mat-header-cell *matHeaderCellDef ><span>{{'days_short.thu' | translate}} <span [ngClass]="(isToday(4))?'today':''"> {{getDay(4)}}</span></span></mat-header-cell>
+                 <mat-cell *matCellDef="let element" [ngClass]="(getByDate(4,element.hora) != null)?'plantilla':''"> <div *ngIf="getByDate(4,element.hora) != null;let plantilla" style="text-align: center;    line-height: 15px;" (click)="verPlantilla(getByDate(4,element.hora))">
+                  <span> {{getByDate(4,element.hora).categoria.nombre}} {{getByDate(4,element.hora).condicional | ejercicio}}</span>
+         
+                </div> </mat-cell>               </ng-container>
+               
+               <ng-container matColumnDef="viernes">
+                 <mat-header-cell *matHeaderCellDef > <span>{{'days_short.fri' | translate}} <span [ngClass]="(isToday(5))?'today':''"> {{getDay(5)}}</span></span> </mat-header-cell>
+                 <mat-cell *matCellDef="let element" [ngClass]="(getByDate(5,element.hora) != null)?'plantilla':''"> <div *ngIf="getByDate(5,element.hora) != null;let plantilla" style="text-align: center;    line-height: 15px;" (click)="verPlantilla(getByDate(5,element.hora))">
+                  <span> {{getByDate(5,element.hora).categoria.nombre}} {{getByDate(5,element.hora).condicional | ejercicio}}</span>
+         
+                </div> </mat-cell>               </ng-container>
+               
+               <ng-container matColumnDef="sabado">
+                 <mat-header-cell *matHeaderCellDef ><span>{{'days_short.sat' | translate}} <span  [ngClass]="(isToday(6))?'today':''"> {{getDay(6)}}</span></span></mat-header-cell>
+                 <mat-cell *matCellDef="let element" [ngClass]="(getByDate(6,element.hora) != null)?'plantilla':''"> <div *ngIf="getByDate(6,element.hora) != null;let plantilla" style="text-align: center;    line-height: 15px;" (click)="verPlantilla(getByDate(6,element.hora))">
+                  <span> {{getByDate(6,element.hora).categoria.nombre}} {{getByDate(6,element.hora).condicional | ejercicio}}</span>
+         
+                </div> </mat-cell>               </ng-container>
+               
+               
+             
+     
+             
+               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+               <mat-row *matRowDef="let row;  let even = even; columns: displayedColumns;"></mat-row>
+             </mat-table>
+           </mat-card-content>
+       </mat-card>
+   </div>
+    
+</div>
+<!-- 
+<button mat-fab class="futxtrm-color-dorado add-button"  matTooltip="Nuevo administrador" routerLink="/admin/usuarios/agregar">
+ <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+</button> -->

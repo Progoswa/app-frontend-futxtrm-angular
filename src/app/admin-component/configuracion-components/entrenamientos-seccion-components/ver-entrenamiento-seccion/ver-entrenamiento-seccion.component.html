@@ -1,0 +1,35 @@
+<h2 mat-dialog-title class="text-center margin-button-5 color-dorado"> {{data.ejercicio}} </h2>
+
+<div mat-dialog-content class="text-center margin-button-5 content container-entrenamiento">
+  <mat-card   class="card-entrenamiento futxtrm-color-dorado color-negro" [ngStyle.gt-sm]="{'min-width':'650px'}" >
+    <div style="text-align: left"> <span> <span style="font-weight: 500;">{{'pages.exercises.section.see.name' | translate}}:</span> {{data.ejercicio}}</span></div>
+    <div style="text-align: left"> <span><span style="font-weight: 500;">{{'pages.exercises.section.see.repeat' | translate}}:</span> {{data.repeticiones}}</span> <span><span style="font-weight: 500;"> Tiempo: </span> {{data.tiempo}} min</span></div>
+    <div style="text-align: left"> <span><span style="font-weight: 500;">{{'pages.exercises.section.see.description' | translate}}:</span> {{data.descripcion}}</span> </div>
+    <div style="text-align: left"> <span><span style="font-weight: 500;">{{'pages.exercises.section.see.requirements' | translate}}:</span> {{data.requerimientos}}</span> </div>
+    <div style="text-align: left"> <span><span style="font-weight: 500;">{{'pages.exercises.section.see.type' | translate}}:</span> {{data.tipo | ejercicio}}</span> </div>
+   <div fxLayout.gt-xs="row" fxLayout.xs="column">
+    <div fxFlex.gt-xs="50" style="    margin-top: 12px;">
+      <img src="{{data.url}}/{{data.imagen}}" alt=""  width="90%" height="200px" >
+    </div>
+    <div fxFlex.gt-xs="50" >
+ 
+     
+  
+      <div *ngIf="data.formato == 'mp4'">
+        <video width="90%" height="200px" controls controlsList="nodownload">
+          <source src="{{data.url}}/{{data.video}}" type="video/mp4">
+          <source src="{{data.url}}/{{data.video}}" type="video/ogg">
+          <source src="{{data.url}}/{{data.video}}" type="video/webm">
+        Your browser does not support the video tag.
+        </video>
+      </div>
+      <div *ngIf="data.formato == 'vimeo'">
+        
+        <div  style="padding:56.25% 0 0 0;position:relative;width: 90%;height: 200px;"><iframe [src]="data.id_vimeo | vimeo" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+      </div>
+    </div>
+   </div>
+ 
+  </mat-card>
+  </div>

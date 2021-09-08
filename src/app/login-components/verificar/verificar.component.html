@@ -1,0 +1,43 @@
+<div class="login" fxLayout="row">
+  <img class="logo" alt="homepage" src="./assets/images/logo.png" width="180px">
+
+  <div fxFlex.lt-md="0%" fxFlex.gt-sm="60%">
+  </div>
+  <div fxFlex.lt-md="100%"  fxFlex.gt-sm="40%" fxLayout="row" class="login-content futxtrm-color-negro">
+    <mat-card fxFlex.lt-sm="100%" fxFlex.gt-sm="65%" fxFlex.md="90%"  fxFlexAlign="center" class="card-login  futxtrm-color-negro color-blanco" *ngIf="verificar">
+      <mat-card-content >
+        <div class="text-center">
+          <span ><mat-icon aria-hidden="false" aria-label="Example home icon" class="success">done_all</mat-icon></span>
+                <p style="font-weight: 500;">Cuenta verificada</p>
+                <p class="f-p-text">Gracias por verificar su correo</p>
+        </div>
+    
+        <div class="text-center no-account" >
+
+
+          <a class="link color-dorado" routerLink="/ingresa" >Ir al inicio</a>
+        </div>
+     
+        
+      </mat-card-content>        
+  </mat-card>
+    <mat-card fxFlex.lt-sm="100%" fxFlex.gt-sm="65%" fxFlex.md="90%"  fxFlexAlign="center" class="card-login futxtrm-color-negro color-blanco" *ngIf="!verificar">
+      <mat-card-content >
+        <div class="text-center">
+          <span ><mat-icon aria-hidden="false" aria-label="Example home icon" class="error">close</mat-icon></span>
+                <p style="font-weight: 500;">Enlace expirado</p>
+                <p class="f-p-text">Este enlace ya ha caducado</p>
+        </div>
+    
+        <div class="text-center no-account" >
+
+          <a class="link color-dorado" routerLink="/ingresa" >Ir al inicio</a>
+        </div>
+     
+        
+      </mat-card-content>        
+  </mat-card>
+  </div>
+
+
+</div>

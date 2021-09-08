@@ -1,0 +1,49 @@
+<h3 class="text-center margin-button-5 color-dorado">
+  {{ "user.home.choose.title" | translate }} {{ data.nombre }}
+</h3>
+<div mat-dialog-content class="color-blanco margin-button-5 content">
+  <div class="row">
+    <div class="col-sm-6 text-center">
+      <img
+        src="./assets/images/plantilla.PNG"
+        ngClass.lt-md="width-100"
+        alt=""
+        width="320px"
+      /><br />
+      <button
+        mat-raised-button
+        class="futxtrm-color-dorado color-negro"
+        (click)="predeterminada()"
+      >
+        <h6 style="margin: 8px 0">
+          {{ "user.home.choose.default.button" | translate }}
+        </h6></button
+      ><br />
+      <h6 style="margin-top: 8px">
+        ({{ data.dias.length }}
+        {{ "user.home.choose.default.days" | translate }} )
+      </h6>
+    </div>
+    <div class="col-sm-6 text-center">
+      <img
+        src="./assets/images/plantilla.PNG"
+        ngClass.lt-md="width-100"
+        alt=""
+        width="320px"
+      /><br />
+      <button
+        mat-raised-button
+        class="futxtrm-color-dorado color-negro"
+        (click)="personalizada()"
+      >
+        <h6 style="margin: 8px 0">
+          {{ "user.home.choose.personalized.button" | translate }}
+        </h6></button
+      ><br />
+
+      <h6 style="margin-top: 8px">
+        {{ "user.home.choose.personalized.days" | translate }}
+      </h6>
+    </div>
+  </div>
+</div>

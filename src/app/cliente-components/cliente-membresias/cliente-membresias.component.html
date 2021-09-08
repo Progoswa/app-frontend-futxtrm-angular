@@ -1,0 +1,24 @@
+<h2 class="color-dorado">{{'user.memberships.title' | translate}}</h2>
+
+
+ 
+ <div class="row">
+  
+  <div *ngFor="let membresia of membresias" class="col-md-4 col-sm-6 col-xs-12" style="padding: 20px;" fxFlex="row">
+    <div>
+
+      <mat-card  class="categoria-card" [ngStyle]="{'background-image': getImg(membresia.image)}"  >
+        <div class="membresia" (click)="info(membresia._id)"></div>
+      </mat-card>
+    </div>
+    
+    <div class="title">
+      <span>{{membresia.name}}</span> <br>
+    </div>
+  
+  </div>
+
+   
+ 
+
+ </div>

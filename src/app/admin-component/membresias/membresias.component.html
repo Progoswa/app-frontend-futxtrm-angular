@@ -1,0 +1,34 @@
+
+ <div class="row">
+  
+  <div *ngFor="let membresia of membresias" class="col-md-4 col-sm-6 col-xs-12" style="padding: 20px;" fxFlex="row">
+    <div>
+
+      <mat-card  class="categoria-card" [ngStyle]="{'background-image': getImg(membresia.image)}"  >
+        <button  [matMenuTriggerFor]="menu" mat-fab class="futxtrm-color-dorado remove-button" matTooltipPosition="above" matTooltip="Opciones"> <mat-icon>settings</mat-icon></button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="update(membresia)" ><mat-icon>edit</mat-icon>{{'pages.membership.options.edit' | translate}}</button>
+          <button mat-menu-item (click)="status(membresia._id)"><mat-icon>{{(membresia.status)?'remove':'check'}}</mat-icon>{{(membresia.status)?translate.instant('pages.membership.options.disable'):translate.instant('pages.membership.options.enable')}}</button>
+          <button (click)="remove(membresia._id)"  mat-menu-item matTooltipPosition="above" matTooltip="Remover membresia"><mat-icon>delete</mat-icon>{{'pages.membership.options.delete' | translate}}</button>
+        </mat-menu>
+        <div *ngIf="membresia.status == false" class="lock" ></div>
+
+        <!-- <div *ngIf="membresia.status == true"  class="membresia"></div> -->
+      </mat-card>
+    </div>
+    
+    <div class="title">
+      <span>{{membresia.name}}</span> <br>
+      <span>{{membresia.description}}</span>
+    </div>
+  
+  </div>
+
+   
+ 
+
+ </div>
+  
+ <button (click)="add()"  mat-fab class="futxtrm-color-dorado add-button"  matTooltip="{{'pages.membership.new.msg' | translate}}">
+  <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+ </button>

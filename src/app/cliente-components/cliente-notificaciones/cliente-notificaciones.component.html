@@ -1,0 +1,39 @@
+<div fxLayout="row wrap" fxFlex="100" [ngStyle]="{'margin':'auto'}" class="max-w">
+  <div fxLayout="row wrap" fxFlex="100"  fxLayoutAlign="center" [ngStyle]="{'margin':'auto'}">
+    <!-- column -->    
+     <div fxFlex="100">
+         <mat-card class="comments-card futxtrm-color-negro color-dorado">
+             <mat-card-title>{{'pages.notifications.title' | translate}}</mat-card-title>
+            
+  
+             <mat-card-content   class="comments-content comment-widgets">
+      <div class="d-flex flex-row comment-row ng-star-inserted" fxLayout="row" class="comment-row" *ngFor="let notificacion of notificaciones" (click)="verNotificacion(notificacion)">
+        <div class="p-2">
+          
+        </div>
+        <div style="width: 90%;" class="comment-text" >
+            <p class="m-b-5">{{notificacion.mensaje}}</p>
+            <div >
+                <span class="text-muted pull-right" >{{notificacion.fecha  | date:'short'}}</span>
+                <span class="label label-info" [ngClass]="(notificacion.visto)?'label-light-success':'label-info'" >{{(notificacion.visto)?translate.instant('pages.notifications.see'):translate.instant('pages.notifications.new')}}</span>
+                
+            
+            </div>
+        </div>
+      </div>
+             
+             </mat-card-content>
+         
+         </mat-card>
+       
+     </div>
+    
+  </div>
+  
+
+  
+ </div>
+
+
+ 
+ 

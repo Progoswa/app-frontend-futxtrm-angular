@@ -1,0 +1,241 @@
+<!-- ============================================================== -->
+<!-- Simple four boxes Row -->
+<!-- ============================================================== -->
+<div fxLayout="row wrap">
+  <!-- column -->    
+
+<!-- ============================================================== -->
+<!-- Image Card row-->
+<!-- ============================================================== -->
+<div fxLayout="row wrap" fxFlex="100">
+  <!-- Card column -->
+  <div fxFlex.gt-sm="35" fxFlex.gt-xs="100" fxFlex="100">
+      <mat-card class="oh text-center little-profile futxtrm-color-negro color-blanco">
+          <img mat-card-image src="assets/images/background/profile-bg.jpg" alt="Photo of a Shiba Inu">
+          <mat-card-content>
+              <div class="pro-img">
+                  <img *ngIf="usuario" src={{usuario.url}} width="100" alt="user" class="img-circle">
+              </div>
+              <h3 class="m-b-0"  *ngIf="usuario" >{{usuario.nombre}} {{usuario.apellido}}</h3>
+              <h6 class="m-t-0 ">{{'pages.profile.admin' | translate}}</h6>
+            <mat-divider ></mat-divider>
+      
+              <div fxLayout="column" fxLayoutWrap="wrap" class="m-t-30" *ngIf="usuario" >
+                  <div fxLayout="row" fxFlex.gt-sm="33.33%" fxFlex.gt-xs="33.33%" fxFlex="100" class="p-t-4">
+                    <div fxLayout="column">
+                      <small fxLayout="row" class="text-muted " fxFlex="50">{{'pages.profile.email' | translate}}</small> 
+                      <h6 class="m-0" fxLayout="row" fxFlex="50">{{usuario.email}}</h6>
+                    </div>
+              
+                      
+                  </div>
+                  <div fxLayout="row" fxFlex.gt-sm="33.33%" fxFlex.gt-xs="33.33%" fxFlex="100" class="p-t-4">
+                    <div fxLayout="column">
+                      <small fxLayout="row" class="text-muted " fxFlex="50">{{'pages.profile.phone' | translate}}</small> 
+                      <h6 class="m-0" fxLayout="row" fxFlex="50">{{usuario.telefono}}</h6>
+                    </div>
+              
+                  </div>
+                  <div fxLayout="row" fxFlex.gt-sm="33.33%" fxFlex.gt-xs="33.33%" fxFlex="100" class="p-t-4">
+                    <div fxLayout="column">
+                      <small fxLayout="row" class="text-muted " fxFlex="50">{{'pages.profile.address' | translate}}</small> 
+                      <h6 class="m-0" fxLayout="row" fxFlex="50">{{usuario.direccion}}</h6>
+                    
+                    </div>
+              
+                  </div>
+              </div>
+          </mat-card-content>
+      </mat-card>
+
+     
+  </div>
+  <!-- Card column -->
+  <!-- Card column -->
+  <div  fxFlex.gt-sm="65" fxFlex.gt-xs="100" fxFlex="100">
+      <mat-card class="futxtrm-color-negro color-blanco">
+          <mat-tab-group>
+              <!-- Tab 1 -->
+              <mat-tab label="{{'pages.profile.profile.title' | translate}}">
+                  <mat-card-content class="perfil-content" *ngIf="usuario">
+                    <form [formGroup]="perfilForm" class="color-blanco">
+                      <div class="row"> 
+                        <div  class="col-sm-12 col-md-3" >
+                          <div class="pro-img" *ngIf="usuario"  class="text-center">
+                            <div class="text-center" >
+                             
+                              <img src={{usuario.urlPerfil}} width="100" height="100" alt="user" class="img-circle" >
+                              <input hidden type="file" #uploader accept="image/*" (change)="subirImagen($event)"/>
+                              <button mat-icon-button [ngStyle]="{'margin-left':'-20px'}" (click)="uploader.click()"><mat-icon>add_photo_alternate</mat-icon></button>
+                            </div>
+                      
+              
+                          </div>
+                        </div>
+                        <div  class="col-sm-12 col-md-9 row" >
+                          <div class="col-sm-6 col-md-3 col-xs-12">
+                            <mat-form-field appearance="outline">
+                              <mat-label>{{'pages.profile.profile.name' | translate}}</mat-label>
+                              <input matInput  type="text" formControlName="nombre"> 
+                            </mat-form-field>
+                          </div>
+                          <div class="col-sm-6 col-md-3 col-xs-12">
+     
+                            <mat-form-field appearance="outline">
+                              <mat-label>{{'pages.profile.profile.last_name' | translate}}</mat-label>
+                              <input matInput type="text" formControlName="apellido"> 
+                            </mat-form-field>
+                          </div>
+
+                          <div class="col-sm-6  col-xs-12">
+                            <mat-form-field appearance="outline">
+                              <mat-label>{{'pages.profile.profile.phone' | translate}}</mat-label>
+                              <ngx-mat-intl-tel-input
+                              [preferredCountries]="['mx', 'us']"
+                              [enablePlaceholder]="true"
+                              [enableSearch]="true"
+                              name="telefono"
+                              formControlName="telefono" #telefono></ngx-mat-intl-tel-input>
+                              <mat-hint>Ejem. {{telefono.selectedCountry.placeHolder}}</mat-hint>
+                              <mat-error *ngIf="perfilForm.controls.telefono?.errors?.required">Tefelono requerido</mat-error>
+                              <mat-error *ngIf="perfilForm.controls.telefono?.errors?.validatePhoneNumber">Numero invalido</mat-error>
+                            </mat-form-field>
+                          </div>
+
+                         
+                       
+                          
+                            <div class="col-sm-12 col-md-4">
+                              <mat-form-field  class="input" appearance ="outline">
+                                <mat-label>{{'pages.profile.profile.country' | translate}}</mat-label>
+                                <mat-select formControlName="pais" class="color-blanco">
+                                  <mat-option *ngFor="let pais of paises" [value]="pais.name" (onSelectionChange)="getEstados(pais)">
+                                    {{pais.name}}
+                                  </mat-option>
+                               
+                                </mat-select>            
+                              </mat-form-field>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                              <mat-form-field  class="input" appearance ="outline">
+                                <mat-label>{{'pages.profile.profile.state' | translate}}</mat-label>
+                                <mat-select formControlName="estado" class="color-blanco">
+                                  <mat-option *ngFor="let estado of estados" [value]="estado.name" (onSelectionChange)="getCitys(estado)">
+                                    {{estado.name}}
+                                  </mat-option>
+                               
+                                </mat-select>              
+                              </mat-form-field>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                              <mat-form-field  class="input" appearance ="outline">
+                                <mat-label>{{'pages.profile.profile.city' | translate}}</mat-label>
+                                <mat-select formControlName="ciudad" class="color-blanco">
+                                  <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.name" >
+                                    {{ciudad.name}}
+                                  </mat-option>
+                               
+                                </mat-select>            
+                              </mat-form-field>
+                            </div>
+                         
+                          
+                          
+                        
+                          <div class="col-sm-12">
+                           
+                              <mat-form-field appearance="outline">
+                                <mat-label>{{'pages.profile.profile.address' | translate}}</mat-label>
+                                <input matInput type="text" formControlName="direccion">
+                              </mat-form-field>
+                           
+                          
+                          </div>
+                          
+                        </div>
+                       
+                      </div>
+                      <div class="save-perfil">
+                        <button mat-raised-button class="futxtrm-color-dorado text-white" [disabled]="perfilForm.invalid" (click)="actualizarPerfil()" >{{'pages.profile.profile.save' | translate}}</button>
+                      </div>
+                   
+                    </form>
+                  
+                 
+                  </mat-card-content>
+              </mat-tab>
+              <!-- End Tab 1 -->
+              <!-- Tab 2 -->
+              <mat-tab label="{{'pages.profile.security.title' | translate}}">
+                  <mat-card-content>
+                   
+                      <!-- ============================================================== -->
+                      <!-- column -->
+                      <!-- ============================================================== -->
+                      <form [formGroup]="seguridadForm" class="basic-form" class="color-blanco">
+                          <div fxLayout="row wrap" fxFlex.gt-sm="50" fxFlex.lt-md="100" [ngStyle]="{'margin':'auto'}">
+                              <!-- column -->
+                              <div fxFlex.gt-sm="100" fxFlex="100">
+                                  <mat-form-field appearance="outline">
+                                      <mat-label>{{'pages.profile.security.email' | translate}}</mat-label>
+                                      <input matInput type="email" formControlName="email">
+                                      <mat-error *ngIf="seguridadForm.controls.email.errors?.required">{{'pages.profile.security.email_required' | translate}}</mat-error>
+                                      <mat-error  *ngIf="seguridadForm.controls.email.errors?.email">{{'pages.profile.security.email_pattern' | translate}}</mat-error>
+                                  </mat-form-field>
+                              </div>
+                              <div fxFlex.gt-sm="100" fxFlex="100">
+                                  <mat-form-field appearance="outline">
+                                    <mat-label>{{'pages.profile.security.username' | translate}}</mat-label>
+                                      <input matInput  type="text" formControlName="username">
+                                      <mat-error *ngIf="seguridadForm.controls.username.errors?.required">{{'pages.profile.security.username_required' | translate}}</mat-error>
+                                    
+                                  </mat-form-field>
+                              </div>
+                              <!-- column -->
+                            
+                              <!-- column -->
+                              <div fxFlex.gt-sm="100" fxFlex="100">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>{{'pages.profile.security.current_password' | translate}}</mat-label>
+                                    <input matInput  type="password" formControlName="password" >
+                                    <mat-error *ngIf="seguridadForm.controls.password.errors?.required">{{'pages.profile.security.current_password_required' | translate}}</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <mat-checkbox  formControlName="cambiar" color="primary" class="example-margin">{{'pages.profile.security.check' | translate}}</mat-checkbox>
+                            
+                              <div fxFlex.gt-sm="100" fxFlex="100" *ngIf="seguridadForm.controls.cambiar.value" >
+                                <mat-form-field appearance="outline">
+                                    <mat-label>{{'pages.profile.security.new_password' | translate}}</mat-label>
+                                    <input matInput  type="password" formControlName="npassword">
+                                    <mat-error *ngIf="seguridadForm.controls.npassword.errors?.pattern">{{'pages.profile.security.new_password_pattern' | translate}}</mat-error>
+
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex.gt-sm="100" fxFlex="100" *ngIf="seguridadForm.controls.cambiar.value" >
+                                <mat-form-field appearance="outline">
+                                    <mat-label>{{'pages.profile.security.repeat_password' | translate}}</mat-label>
+                                    <input matInput  type="password" formControlName="rnpassword">
+                                    <mat-error *ngIf="seguridadForm.controls.rnpassword.errors?.repeatInvalid">{{'pages.profile.security.repeat_password_invalid' | translate}}</mat-error>
+                                </mat-form-field>
+                            </div>
+                           
+                            
+
+                              <!-- column -->
+                            
+
+                              <!-- column -->
+                           
+                              <!-- column -->
+                              <div class="save-seguridad">
+                                <button mat-raised-button class="futxtrm-color-dorado text-white" [disabled]="seguridadForm.invalid" (click)="actualizarSeguridad()" >{{'pages.profile.security.save' | translate}}</button>
+                              </div>
+                          </div>
+                      </form>
+                  </mat-card-content>
+              </mat-tab>
+          </mat-tab-group>
+      </mat-card>
+  </div>
+</div>

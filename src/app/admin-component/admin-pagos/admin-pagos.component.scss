@@ -1,0 +1,129 @@
+.add-button{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.buscador-small{
+    min-width: 200px;
+
+}
+
+.buscador{
+    width: 100%;
+}
+
+.card-container{
+    padding: 0px 50px !important;
+}
+
+.excel{
+background-color: #D0AE3D;
+color: white;
+}
+.pdf{
+    margin-left: 5px;;
+    background-color: #D0AE3D;
+    color: white;
+}
+
+.icon-search{
+    vertical-align: bottom !important;
+    color: white !important;
+}
+
+.margin-buttons-row{
+    margin: 0px 5px;
+}
+.margin-buttons-col{
+    margin: 5px 0px;
+}
+
+.rojo{
+    color: #ff1744;
+}
+
+.verde{
+    color: #00e676;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+    background-color: white !important;
+}
+
+//input outline color
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #D0AE3D!important;
+    // opacity: 1!important;
+}
+
+//mat-input focused color
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color:#D0AE3D !important;
+}
+
+// mat-input error outline color
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick{
+    color: red!important;
+    opacity: 0.8!important;
+}
+
+// mat-input carent color
+::ng-deep .mat-input-element {
+    caret-color: white !important;
+}
+
+// mat-input error carent color
+::ng-deep .mat-form-field-invalid .mat-input-element, .mat-warn .mat-input-element {
+    caret-color: white !important;
+}
+
+// mat-label normal state style
+::ng-deep .mat-form-field-label {
+    color: white !important;
+    // color: $mainColor!important;
+}
+
+// mat-label focused style
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color:  white !important;
+}
+
+// mat-label error style
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+    color: red!important;
+}
+
+::ng-deep .mat-checkbox-inner-container{
+    background: white;
+}
+
+
+::ng-deep .mat-header-cell{
+    color: white !important;
+}
+
+::ng-deep .mat-cell, .mat-footer-cell {
+    color:white !important;
+}
+
+::ng-deep .mat-footer-row, .mat-header-row, .mat-row{
+    border-color: #D0AE3D;
+}
+
+::ng-deep .mat-paginator button {
+    color: #D0AE3D !important;
+}
+
+::ng-deep .mat-paginator .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: rgb(255, 255, 255);
+}
+
+::ng-deep .mat-paginator .mat-select-value  {
+    color: rgb(255, 255, 255);
+}
+
+::ng-deep .mat-paginator  .mat-select-arrow {
+    color: rgb(255, 255, 255);
+}
+

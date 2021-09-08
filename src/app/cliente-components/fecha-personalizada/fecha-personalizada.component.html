@@ -1,0 +1,59 @@
+<h2 mat-dialog-title class="text-center margin-button-5 color-dorado">{{'user.home.choose.personalized.title' | translate}} {{data.nombre}}</h2>
+<div mat-dialog-content class="color-blanco margin-button-5 content">
+  <div class="row">
+    <div class="col-sm-12 text-center"><h6>{{'user.home.choose.personalized.subtitle' | translate}}</h6></div>
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-6 row" style="margin: 0;padding: 0 5px;">
+  
+        
+          <form [formGroup]="horarioForm">
+          <div class="col-sm-12 row" style="padding: 0 5px;">
+           <div class="col-sm-12 text-center"><span >{{'user.home.choose.personalized.hour' | translate}}</span></div>
+           <mat-form-field class="col-sm-7" appearance="outline">
+             <mat-label>{{'user.home.choose.personalized.hour_start' | translate}}</mat-label>
+             <input   (input)="hourChange()"   matInput formControlName="min" placeholder="6:00 AM" >
+             <!-- <ngx-material-timepicker #min  (timeSet)="hourChange($event)"></ngx-material-timepicker> -->
+            
+           </mat-form-field >
+           <div class="col-sm-5 amorpmdiv">
+            <button mat-raised-button class="amorpm" (click)="selectHour('am')" [ngClass]="{'select':hour == 'am'}">AM</button>
+            <button mat-raised-button class="amorpm" (click)="selectHour('pm')"  [ngClass]="{'select':hour == 'pm'}">PM</button>
+           </div>
+          
+          </div>
+          <div class="col-sm-12" style="padding: 0 5px;">
+           <mat-form-field appearance="outline">
+             <mat-label>{{'user.home.choose.personalized.hour_end' | translate}}</mat-label>
+             <input [ngxTimepicker]="max"  [disabled]="true"  readonly matInput formControlName="max"  >
+             <ngx-material-timepicker  #max></ngx-material-timepicker>
+           </mat-form-field>
+          </div>
+        </form>
+        </div>
+          <div class="col-sm-6" style="margin: 0;">
+            
+          <mat-form-field style="margin-top: 24px !important;" appearance="outline">
+            <mat-label>{{'user.home.choose.personalized.select' | translate}}</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="dia[0].fecha" disabled [min]="minDate" [max]="maxDate">
+            <mat-datepicker-toggle class="color-blanco" matSuffix [for]="picker" ></mat-datepicker-toggle>
+            <mat-datepicker #picker disabled="false"></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>{{'user.home.choose.personalized.type' | translate}}</mat-label>
+            <mat-select  [(ngModel)] = "dia[0].tipo" [ngModelOptions]="{standalone: true}" >
+              <mat-option *ngFor="let tipo of tipos" [value]="tipo">{{tipo | ejercicio}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+     
+       
+      </div>
+    </div>
+  
+  
+  </div>
+<div mat-dialog-actions class="margin-actions float-right">
+  <button mat-button (click)="onNoClick()" tabindex="-1"  class="margin-button-5 futxtrm-color-gris" >{{'user.home.choose.personalized.cancel' | translate}} </button>
+  <button mat-button (click)="aceptar()" tabindex="-1"  class="margin-button-5 futxtrm-color-dorado" [disabled]="horarioForm.invalid || dia[0].tipo == 0 || dia[0].fecha == ''">{{'user.home.choose.personalized.continue' | translate}} </button>
+</div>

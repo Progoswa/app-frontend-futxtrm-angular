@@ -1,0 +1,66 @@
+<div class="login" fxLayout="row">
+  <img class="logo" alt="homepage" src="./assets/images/logo.png" width="180px">
+
+  <button class="select-lang lang" mat-raised-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <img src="./assets/flags/{{translate.currentLang}}.png" width="24px" alt=""> 
+    <span>    {{translate.currentLang}}</span>
+  </button>
+  <mat-menu class="lang" #menu="matMenu">
+    <button mat-menu-item class="lang" *ngFor="let language of translate.getLangs()" (click)="switchLang(language)"> 
+      <img src="./assets/flags/{{language}}.png" width="24px" alt=""> 
+      <span> {{ language }} </span>
+    </button>
+ 
+  </mat-menu>
+  
+ 
+    <mat-card fxFlex.lt-sm="100%" fxFlex.gt-sm="65%" fxFlex.md="90%"  fxFlexAlign="center" class="card-login color-blanco black-opacity ">
+  
+      <mat-card-content >
+        <div class="text-center">
+          <h3  class="top-card">{{'login.login' | translate }}</h3>
+        </div>
+        <!-- <div class="text-center">Con tus redes sociales</div>
+        <div fxLayour="row" >
+          
+          <div class="text-center" fxFlex="50%">
+            <button  mat-raised-button class="facebook-button" (click)="loginSocial('facebook')"> <img src="./assets/images/facebook.png" alt="facebook" width="18px" height="18px"> <span style="margin-left: 5px;">Facebook</span> </button>
+          </div>
+          <div  class="text-center" fxFlex="50%">
+            <button  mat-raised-button class="google-button" (click)="loginSocial('google')"><img  src="./assets/images/google.png" alt="google" width="18px" height="18px"><span style="margin-left: 5px;">Google</span> </button>
+          </div>
+        </div>
+       
+        <hr class="hr-text" data-content=""> -->
+        <form [formGroup]="loginForm"   >
+          <mat-form-field appearance ="outline" >
+            <mat-label>{{'login.user' | translate }}</mat-label>
+            <input matInput  formControlName="usuario" >
+            <mat-error *ngIf="loginForm.controls.usuario.errors?.required">{{'login.user_required' | translate }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance ="outline">
+            <mat-label>{{'login.password' | translate }}</mat-label>
+            <input matInput type="password"   formControlName="password">
+            <mat-error *ngIf="loginForm.controls.password.errors?.required">{{'login.password_required' | translate }}</mat-error>
+          </mat-form-field>
+          <div fxLayout="row">
+            <div fxFlex="50%"> <mat-checkbox  formControlName="remember" color="primary" class="example-margin">{{'login.rememberme' | translate }}</mat-checkbox></div>
+            <div fxFlex="50%" style="text-align: right;"> <a class="link color-dorado"  routerLink="/recuperar-contrasena">{{'login.forgot_password' | translate }}</a></div>
+        
+          </div>
+          <button   mat-raised-button color="primary"  class="login-button futxtrm-color-dorado" [disabled]="loginForm.invalid" (click)="login()">{{'login.login' | translate }} <mat-icon>arrow_forward</mat-icon></button>
+          <div class="text-center no-account" >
+
+            <span>{{'login.not_account' | translate }} </span><a routerLink="/registro-cliente" class="color-dorado">{{'login.sign_up' | translate }}</a>
+          </div>
+        </form>
+   
+
+     
+        
+      </mat-card-content>        
+  </mat-card>
+
+
+
+</div>

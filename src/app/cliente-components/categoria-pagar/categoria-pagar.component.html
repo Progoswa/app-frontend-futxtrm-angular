@@ -1,0 +1,299 @@
+<div class="row color-dorado" style="margin-top: 2rem; padding: 20px">
+  <img
+    style="margin: auto"
+    alt="homepage"
+    src="./assets/images/logo.png"
+    width="180px"
+  />
+
+  <div class="col-sm-12" style="margin-bottom: 5px" *ngIf="categoria">
+    <h3 class="color-dorado">
+      {{ "user.categorie_payment.title" | translate }} {{ categoria.nombre }}
+    </h3>
+    <h5 class="color-dorado">
+      {{ "user.categorie_payment.subtitle" | translate }}
+    </h5>
+    <mat-radio-group
+      (change)="generateButton()"
+      [(ngModel)]="precio"
+      [ngModelOptions]="{ standalone: true }"
+      class="row"
+      aria-label="Select an option"
+    >
+      <div *ngFor="let precio of categoria.precios">
+        <mat-radio-button
+          *ngIf="precio.precio > 0"
+          [value]="precio"
+          class="col-sm-12"
+          [disabled]="generando"
+          >{{ precio.meses }}
+          {{
+            precio.meses == 1
+              ? translate.instant("user.categorie_payment.month_by")
+              : translate.instant("user.categorie_payment.months_by")
+          }}
+          {{ precio.precio }}$</mat-radio-button
+        >
+      </div>
+    </mat-radio-group>
+  </div>
+
+  <div class="col-sm-8" *ngIf="precio != null">
+    <h5 class="color-dorado">{{ "user.categorie_payment.pay" | translate }}</h5>
+
+    <div *ngIf="pagoForm.controls.metodo.value == ''">
+      <form [formGroup]="pagoForm">
+        <div class="checkbox-item radio-item option">
+          <input
+            type="radio"
+            name="metodo"
+            id="payment-stripe"
+            value="stripe"
+            formControlName="metodo"
+          />
+          <label for="payment-stripe" style="width: 90%">
+            <div class="row" style="margin-left: 3px">
+              <div class="col-sm-8">
+                <h4>{{ "user.categorie_payment.card.title" | translate }}</h4>
+              </div>
+              <div class="col-sm-4"></div>
+            </div>
+          </label>
+        </div>
+
+        <div class="checkbox-item radio-item option">
+          <input
+            type="radio"
+            name="metodo"
+            id="payment-offline"
+            value="offline"
+            formControlName="metodo"
+          />
+          <label for="payment-offline" style="width: 90%">
+            <div class="row" style="margin-left: 3px">
+              <div class="col-sm-8">
+                <h4>
+                  {{ "user.categorie_payment.offline.title" | translate }}
+                </h4>
+              </div>
+              <div class="col-sm-4"></div>
+            </div>
+          </label>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="pagoForm.controls.metodo.value == 'stripe'" class="row">
+      <div class="col-md-12 row">
+        <div class="col-sm-7">
+          <div>
+            <h6>
+              {{ "user.categorie_payment.card.subtitle" | translate }}
+              <span class="other" (click)="other()">{{
+                "user.categorie_payment.card.other" | translate
+              }}</span>
+            </h6>
+          </div>
+          <form [formGroup]="cardForm">
+            <div class="row">
+              <div class="col-sm-12">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>{{
+                    "user.categorie_payment.card.number.label" | translate
+                  }}</mat-label>
+                  <input
+                    matInput
+                    (input)="formatNumber()"
+                    formControlName="number"
+                  />
+                  <mat-error *ngIf="cardForm.controls.number.invalid">{{
+                    "user.categorie_payment.card.number.invalid" | translate
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{
+                    "user.categorie_payment.card.date.label" | translate
+                  }}</mat-label>
+                  <input
+                    matInput
+                    formControlName="exp"
+                    (input)="formatFecha()"
+                    placeholder="{{
+                      'user.categorie_payment.card.date.placeholder' | translate
+                    }}"
+                  />
+
+                  <mat-error *ngIf="cardForm.controls.exp.invalid">{{
+                    "user.categorie_payment.card.date.invalid" | translate
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>{{
+                    "user.categorie_payment.card.cvc.label" | translate
+                  }}</mat-label>
+                  <input matInput (input)="formatCvc()" formControlName="cvc" />
+                  <mat-error *ngIf="cardForm.controls.cvc.invalid">{{
+                    "user.categorie_payment.card.cvc.invalid" | translate
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-sm-12 text-center">
+              <button
+                mat-raised-button
+                class="futxtrm-color-dorado color-blanco"
+                [disabled]="cardForm.invalid"
+                (click)="procesar()"
+              >
+                {{ "user.categorie_payment.card.button" | translate }}
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="col-sm-5">
+          <div class="credit-card color-blanco" style="padding: 30px 30px">
+            <img
+              src="./assets/images/chip.png"
+              style="width: 40px; height: 35px"
+              alt=""
+            />
+
+            <div style="margin-top: 12px">
+              <span
+                ><h5>{{ cardForm.controls.number.value }}</h5></span
+              >
+            </div>
+
+            <div>
+              <span>{{ cardForm.controls.exp.value }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="pagoForm.controls.metodo.value == 'offline'" class="row">
+      <div class="col-md-12 row">
+        <div>
+          <h6>
+            {{ "user.categorie_payment.offline.subtitle" | translate
+            }}<span class="other" (click)="other()">{{
+              "user.categorie_payment.offline.other" | translate
+            }}</span>
+          </h6>
+        </div>
+        <div>
+          <h6>{{ "user.categorie_payment.offline.msg" | translate }}</h6>
+          <br /><br />
+        </div>
+        <form [formGroup]="offlineForm" class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-6">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>{{
+                  "user.categorie_payment.offline.number.label" | translate
+                }}</mat-label>
+                <input matInput type="number" formControlName="referencia" />
+                <mat-error *ngIf="offlineForm.controls.referencia.invalid">{{
+                  "user.categorie_payment.offline.number.invalid" | translate
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>{{
+                  "user.categorie_payment.offline.capture.label" | translate
+                }}</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  formControlName="captura"
+                  readonly
+                />
+                <input
+                  hidden
+                  type="file"
+                  #uploader
+                  accept="image/*"
+                  (change)="subirImagen($event)"
+                />
+
+                <mat-icon
+                  matSuffix
+                  (click)="uploader.click()"
+                  class="upload-icon"
+                  >add_photo_alternate</mat-icon
+                >
+                <mat-error *ngIf="offlineForm.controls.captura.invalid">{{
+                  "user.categorie_payment.offline.capture.invalid" | translate
+                }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-sm-12 text-center">
+            <button
+              mat-raised-button
+              class="futxtrm-color-dorado color-blanco"
+              [disabled]="offlineForm.invalid"
+              (click)="pagoOffline()"
+            >
+              {{ "user.categorie_payment.offline.button" | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4" *ngIf="precio != null">
+    <div class="row">
+      <div *ngIf="categoria" class="col-sm-12 monto">
+        <div class="col-sm-12">
+          {{ "user.categorie_payment.paypal.title" | translate
+          }}<span class="color-blanco">
+            {{ categoria.nombre }} {{ precio?.meses }}
+            {{
+              precio?.meses == 1
+                ? translate.instant("user.categorie_payment.paypal.month")
+                : translate.instant("user.categorie_payment.paypal.months")
+            }}</span
+          >
+        </div>
+      </div>
+      <div *ngIf="categoria" class="col-sm-12 row monto">
+        <div class="col-sm-7">
+          {{ "user.categorie_payment.paypal.amount" | translate }}
+        </div>
+        <div class="col-sm-5 text-right">
+          <span class="color-blanco"> ${{ precio?.precio }} USD</span>
+        </div>
+      </div>
+      <div *ngIf="categoria" class="col-sm-12 row monto">
+        <div class="col-sm-7">
+          {{ "user.categorie_payment.paypal.discount" | translate }}
+        </div>
+        <div class="col-sm-5 text-right">
+          <span class="color-blanco"> {{ precio?.descuento }} %</span>
+        </div>
+      </div>
+      <div *ngIf="categoria" class="col-sm-12 row monto">
+        <div class="col-sm-7">
+          {{ "user.categorie_payment.paypal.total" | translate }}
+        </div>
+        <div class="col-sm-5 text-right">
+          <span class="color-blanco">
+            ${{
+              precio?.precio - precio?.precio * (precio?.descuento / 100)
+            }}
+            USD</span
+          >
+        </div>
+      </div>
+      <div class="text-center paypal"><div id="paypal" #paypal></div></div>
+    </div>
+  </div>
+</div>

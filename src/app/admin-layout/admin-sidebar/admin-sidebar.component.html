@@ -1,0 +1,29 @@
+
+<mat-nav-list appAccordion>
+    <mat-list-item appAccordionLink *ngFor="let menuitem of Items" routerLinkActive="selected" group="{{menuitem.state}}">
+        <a class="" appAccordionToggle [routerLink]="['/admin', menuitem.state]" *ngIf="menuitem.type === 'link'">
+            <mat-icon>{{ menuitem.icon }}</mat-icon> 
+            <span>{{ menuitem.name }}</span> 
+            <span fxFlex></span> 
+            <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span> 
+        </a>      
+        <a class="" appAccordionToggle  *ngIf="menuitem.type === 'group'">
+            <mat-icon>{{ menuitem.icon }}</mat-icon> 
+            <span>{{ menuitem.name }}</span> 
+            <span fxflex="" style="flex: 1 1 0%; box-sizing: border-box;"></span>
+            <mat-icon role="img" class="mat-icon notranslate dd-icon material-icons mat-icon-no-color" aria-hidden="true">keyboard_arrow_down</mat-icon>
+            <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span> 
+        </a>     
+        <mat-nav-list class="sub-item">
+            <mat-list-item *ngFor="let item of menuitem.group"  class="mat-list-item-content">
+                <a class="" appAccordionToggle  [routerLink]="item.state" routerLinkActive="selected" >
+                    <span >{{ item.name }}</span> 
+                    <span fxFlex></span> 
+                </a>      
+            </mat-list-item>
+        </mat-nav-list> 
+        
+
+    </mat-list-item>
+
+</mat-nav-list>

@@ -1,0 +1,52 @@
+<div></div>
+<h4 class="color-dorado">{{ msg?.title }}</h4>
+<h5 class="color-dorado">{{ msg?.message }}</h5>
+<h5 class="color-dorado">
+  Dias gratis: {{ msg?.days }}
+  <button mat-icon-button (click)="edit()">
+    <mat-icon
+      style="vertical-align: baseline"
+      matTooltip="{{ 'pages.free_categories.msg.edit' | translate }}"
+      class="color-dorado"
+      >edit</mat-icon
+    >
+  </button>
+</h5>
+<div class="row">
+  <div
+    *ngFor="let categoria of categorias"
+    class="col-md-4 col-sm-6 col-xs-12"
+    style="padding: 20px"
+    fxFlex="row"
+  >
+    <div>
+      <mat-card
+        class="categoria-card"
+        [ngStyle]="{ 'background-image': getImg(categoria.categoria.imagen) }"
+      >
+        <button
+          (click)="remove(categoria._id)"
+          mat-fab
+          class="futxtrm-color-rojo remove-button"
+          matTooltipPosition="above"
+          matTooltip="{{ 'pages.free_categories.msg.remove' | translate }}"
+        >
+          <mat-icon>remove</mat-icon>
+        </button>
+      </mat-card>
+    </div>
+
+    <div class="title">
+      <span>{{ categoria.categoria.nombre }}</span> <br />
+    </div>
+  </div>
+</div>
+
+<button
+  (click)="add()"
+  mat-fab
+  class="futxtrm-color-dorado add-button"
+  matTooltip="{{ 'pages.free_categories.msg.add' | translate }}"
+>
+  <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+</button>

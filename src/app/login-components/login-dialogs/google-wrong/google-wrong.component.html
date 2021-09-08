@@ -1,0 +1,10 @@
+<h1 mat-dialog-title class="text-center margin-button-5 margin-top-0 error"><img src="./assets/images/google_logo.png" width="40px" height="40px" alt=""></h1>
+<div mat-dialog-content class="text-center margin-button-5">
+  <span *ngIf="data.type == 'login'"> No existe una cuenta registrada</span>
+  <span *ngIf="data.type == 'register'"> ya existe una cuenta registrada con este correo</span>
+  
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" tabindex="-1"  class="margin-auto">Aceptar</button>
+</div>

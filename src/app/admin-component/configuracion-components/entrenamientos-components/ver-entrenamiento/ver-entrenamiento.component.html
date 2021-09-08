@@ -1,0 +1,117 @@
+<h2 mat-dialog-title class="text-center margin-button-5 color-dorado">{{'pages.exercises.see.title' | translate}} {{data.ejercicio}}</h2>
+<div mat-dialog-content class="text-center margin-button-5 content">
+<form [formGroup]="entrenamientoForm" class="color-blanco">
+ 
+ 
+   
+    <mat-form-field  appearance ="outline">
+      <mat-label>{{'pages.exercises.see.name' | translate}}</mat-label>
+      <input matInput type="text" formControlName="ejercicio" readonly>
+    </mat-form-field>
+
+    
+    <mat-form-field  appearance ="outline">
+      <mat-label>{{'pages.exercises.see.description' | translate}}</mat-label>
+      <textarea matInput  formControlName="descripcion" readonly></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{'pages.exercises.see.requirements' | translate}}</mat-label>
+      <input matInput type="text" formControlName="requerimientos" placeholder="Porteria">
+    </mat-form-field>
+  
+    
+    <mat-form-field appearance="outline">
+      <mat-label>{{'pages.exercises.see.type' | translate}}</mat-label>
+      <mat-select formControlName="tipo" class="color-blanco" >
+        <mat-option *ngFor="let tipo of tipos"  [value]="tipo">
+          {{tipo | ejercicio}}
+        </mat-option>
+      
+      </mat-select>
+    </mat-form-field>
+   
+    <mat-form-field  appearance ="outline">
+      <mat-label>{{'pages.exercises.see.repeat' | translate}}</mat-label>
+      <input matInput type="text" formControlName="repeticiones" placeholder="Ejemplo 2x10" readonly>
+    </mat-form-field>
+   
+   
+    <mat-form-field  appearance ="outline">
+      <mat-label>{{'pages.exercises.see.break' | translate}}</mat-label>
+      <input matInput type="number" formControlName="descanso" readonly>
+    </mat-form-field>
+   
+    <mat-form-field  appearance ="outline">
+      <mat-label>{{'pages.exercises.see.time' | translate}}</mat-label>
+      <input matInput type="number" formControlName="tiempo" readonly>
+    </mat-form-field>
+   
+ 
+    
+    <div *ngIf="entrenamientoForm.controls.formato.value == 'mp4'">
+      <mat-form-field  appearance ="outline">
+        <mat-label>{{'pages.exercises.see.mp4' | translate}}</mat-label>
+        <input matInput type="text" formControlName="video_f"  readonly>
+        <input hidden type="file" #uploader accept="video/mp4" (change)="subirImagen($event,'video')"/>
+      
+      </mat-form-field>
+  
+      
+      <div>
+        <div style="text-align: -webkit-center;">
+     
+          <mat-spinner class="cargando" *ngIf="video_cargando"></mat-spinner>
+    
+        </div>
+    
+        
+        <div *ngIf="urlVideo != null && entrenamientoForm.controls.video.value != ''">
+  
+          <video width="550" height="300" controls controlsList="nodownload">
+            <source src="{{urlVideo}}" type="video/mp4">
+            <source src="{{urlVideo}}" type="video/ogg">
+            <source src="{{urlVideo}}" type="video/webm">
+          Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+
+
+    
+    <div  *ngIf="entrenamientoForm.controls.formato.value == 'vimeo'">
+      <mat-form-field  appearance ="outline">
+        <mat-label>{{'pages.exercises.see.vimeo' | translate}}</mat-label>
+        <input matInput type="text" formControlName="id_vimeo" readonly>
+      
+      </mat-form-field>
+      <div *ngIf="urlVimeo != null" style="padding:56.25% 0 0 0;position:relative;"><iframe [src]="entrenamientoForm.controls.id_vimeo.value | vimeo" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+    </div>
+
+    
+    <mat-form-field  appearance ="outline">
+      <mat-label>GIF</mat-label>
+      <input matInput type="text" formControlName="imagen_f" disabled>
+      <input hidden type="file" #uploaderI accept="image/*" (change)="subirImagen($event,'image')"/>
+    
+    </mat-form-field>
+
+    
+    <div>
+      <div style="text-align: -webkit-center;">
+   
+        <mat-spinner class="cargando" *ngIf="cargando"></mat-spinner>
+  
+      </div>
+  
+      <div *ngIf="urlImagen != null && entrenamientoForm.controls.imagen.value != ''">
+        <img src="{{urlImagen}}" alt="" class="imagen-upload">
+      </div>
+   
+    </div>
+ 
+
+
+   
+</form>
+  </div>

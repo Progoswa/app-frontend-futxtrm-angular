@@ -1,0 +1,90 @@
+<div class="registro" fxLayout="row">
+  <div fxFlex.lt-md="0%" fxFlex.gt-sm="60%">
+  </div>
+  <div fxFlex.lt-md="100%"  fxFlex.gt-sm="40%"  fxLayout="column" class="registro-content">
+    <div fxFlex.gt-sm="20%"  class="text-center registro-logo" >
+      <img alt="homepage" src="./assets/images/logo.png" width="150px" height="150px"> 
+    </div>
+
+    <div fxFlex.gt-sm="50%"  >
+    
+      <div class="text-center title">
+        <h2>Proveedor</h2>
+      <div class="form-proveedor">
+        <form [formGroup]="proveedorForm" fxLayout="column">
+          <div fxLayout.gt-sm="row" fxLayout.lt-sm="column" >
+            
+            <mat-form-field fxFlex.gt-sm="33.3%" fxFlex.lt-sm="100%" class="input">
+              <input matInput placeholder="Nombre" formControlName="nombre">
+              <mat-error *ngIf="proveedorForm.controls.nombre.errors?.required">El nombre es requerido</mat-error>
+              <mat-error *ngIf="proveedorForm.controls.nombre.errors?.pattern">El nombre no puede contener numeros o caracteres especiales</mat-error>
+
+            </mat-form-field>
+            <mat-form-field fxFlex.gt-sm="33.3%" fxFlex.lt-sm="100%" class="input">
+              <input matInput placeholder="Apellido" formControlName="apellido">
+              <mat-error *ngIf="proveedorForm.controls.apellido.errors?.required">El apellido es requerido</mat-error>
+              <mat-error *ngIf="proveedorForm.controls.apellido.errors?.pattern">El nombre no puede contener numeros o caracteres especiales</mat-error>
+
+            </mat-form-field>
+            <mat-form-field fxFlex.gt-sm="33.3%" fxFlex.lt-sm="100%" class="input">
+              <input matInput type="number" placeholder="Telefono" formControlName="telefono">
+                <mat-error *ngIf="proveedorForm.controls.telefono.errors?.required">El telefono es requerido</mat-error>
+
+            </mat-form-field>
+          </div>
+
+          <div fxLayout.gt-sm="row" fxLayout.lt-sm="column" >
+            <mat-form-field fxFlex.gt-sm="33.3%" fxFlex.lt-sm="100%" class="input">
+              <input matInput placeholder="Nombre de usuario" formControlName="username">
+              <mat-error *ngIf="proveedorForm.controls.username.errors?.required">El nombre de usuario es requerido</mat-error>
+          
+            </mat-form-field>
+            <mat-form-field fxFlex.gt-sm="66.6%" fxFlex.lt-sm="100%" class="input">
+              <input matInput placeholder="Correo electrónico" formControlName="email">
+              <mat-error *ngIf="proveedorForm.controls.email.errors?.required">El correo es requerido</mat-error>
+              <mat-error *ngIf="proveedorForm.controls.email.errors?.pattern">El correo no es valido</mat-error>
+            </mat-form-field>
+          </div>
+          
+          <div fxLayout.gt-sm="row" fxLayout.lt-sm="column" >
+            
+            <mat-form-field fxFlex.gt-sm="50%" fxFlex.lt-sm="100%" class="input">
+              <input matInput type="password" placeholder="contraseña" formControlName="password">
+              <mat-error *ngIf="proveedorForm.controls.password.errors?.required">La contraseña es requerida</mat-error>
+              <mat-error *ngIf="proveedorForm.controls.password.errors?.pattern">La contraseña debe tener  entre 8 y 16 caracteres, al menos un dígito, una minúscula, buna mayúscula y un caracter no alfanumérico.</mat-error>            </mat-form-field>
+            <mat-form-field fxFlex.gt-sm="50%" fxFlex.lt-sm="100%" class="input">
+              <input matInput type="password" placeholder="Repetir contraseña" formControlName="rpassword">
+                <mat-error *ngIf="proveedorForm.controls.rpassword.errors?.required">Por favor repita la contraseña</mat-error>
+                <mat-error *ngIf="proveedorForm.controls.rpassword.errors?.minlength">La contraseña debe tener minimo 8 caracteres</mat-error>
+                <mat-error *ngIf="proveedorForm.controls.rpassword.errors?.repeatInvalid">La contraseña no coincide</mat-error>
+            </mat-form-field>
+          </div>
+          <mat-form-field fxFlex="100%" class="input">
+            <input matInput placeholder="Direccion" formControlName="direccion">
+            <mat-error *ngIf="proveedorForm.controls.direccion.errors?.required">Debe intruduccir su dirección</mat-error>
+          </mat-form-field>
+
+
+          <re-captcha style="align-self: center;" (resolved)="resolved($event)" 
+          formControlName="recaptchaReactive" 
+          siteKey="6LeBcewUAAAAAEdhIgHM9TohcTqcnX0QxhUJG0Le">  
+        </re-captcha>  
+
+          <button   mat-raised-button color="primary"  class="register-button mt-4" [disabled]="proveedorForm.invalid"  (click)="register()">Registrarme</button>
+        </form>
+  
+      </div>
+    
+      
+
+      <hr class="hr-text" data-content="O">
+      <div class="text-center" style="margin-bottom: 15px;">
+        <a class="link" routerLink="/registrate">No soy proveedor</a>
+      </div>
+
+    </div>
+  
+  </div>
+
+
+</div>

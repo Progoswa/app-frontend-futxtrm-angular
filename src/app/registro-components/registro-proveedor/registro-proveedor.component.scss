@@ -1,0 +1,148 @@
+.registro{
+
+    background-image: url('../../../assets/images/background/login-bg.jpg') ;
+    height: 100vh;
+    display: -webkit-box;
+    display: flex;
+    background-size: cover;
+    -webkit-box-align: center;
+    align-items: center;
+
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+.registro-logo{
+    
+    width: 100%;
+    margin-top: 15px;
+
+}
+
+.mb-4{
+    margin-bottom: 1.5rem !important;
+}
+
+.mt-4{
+    margin-top: 1.5rem !important;
+}
+
+.type-button{
+    width: 80%;
+    height: 100px;
+    border-radius: 50px;
+    background-color: white;
+    font-size: 18px;
+    border-width: 0.7px;
+}
+
+.type-button:hover{
+   
+    background-color: #1e88e5 !important;
+    color: white;
+}
+
+
+.register-button{
+    width: 60%;
+    height: 45px;
+    margin-top: 15px;
+    margin: auto;
+}
+
+
+
+
+.registro-button{
+    width: 100%;
+    height: 45px;
+    margin-top: 15px;
+}
+
+.registro-content{
+    background-color: white;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+
+
+.text-info {
+    color: #1e88e5!important;
+}
+
+.no-account{
+    margin-top: 15px;
+}
+
+.facebook-button{
+    background-color: #3f5c9a;
+    width: 100%;
+    margin-top: 5px;
+    color: white;
+}
+.google-button{
+    background-color: #D73D32;
+    width: 100%;
+    margin-top: 5px;
+    color: white;
+}
+
+.title{
+    font-size: 20px;
+}
+
+.form-proveedor{
+    padding: 30px;
+}
+
+.input{
+    padding: 15px;
+}
+
+.f-p-text{
+    text-align: center;
+    font-size: 14px;
+    color: #000000ab;
+  }
+
+
+.hr-text {
+    background-color: inherit;
+    line-height: 1em;
+    position: relative;
+    outline: 0;
+    border: 0;
+    color: black;
+    text-align: center;
+    height: 1.5em;
+    opacity: .5;
+    &:before {
+      content: '';
+      // use the linear-gradient for the fading effect
+      // use a solid background color for a solid bar
+      background: linear-gradient(to right, transparent, #818078, transparent);
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 1px;
+    }
+    &:after {
+      content: attr(data-content);
+      position: relative;
+      display: inline-block;
+      color: black;
+  
+      padding: 0 .5em;
+      line-height: 1.5em;
+      // this is really the only tricky part, you need to specify the background color of the container element...
+      color: #818078;
+      background-color: #fcfcfa;
+    }
+  }
+
+   
